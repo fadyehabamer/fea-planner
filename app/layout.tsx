@@ -1,25 +1,9 @@
 import type { Metadata, Viewport } from 'next'
-import { Cairo, Outfit } from 'next/font/google'
 import RegisterSW from '@/components/RegisterSW'
+import { appFont, displayFont } from '@/lib/fonts'
 import { ThemeProvider } from '@/lib/theme'
 import { THEME_COLORS, THEME_KEY } from '@/lib/theme-constants'
 import './globals.css'
-
-const cairo = Cairo({
-  subsets: ['arabic', 'latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-app',
-  display: 'swap',
-})
-
-// Latin display face for marketing headings. Arabic has no Outfit glyphs, so
-// it falls through to Cairo automatically via the font-family stack.
-const outfit = Outfit({
-  subsets: ['latin'],
-  weight: ['500', '600', '700', '800'],
-  variable: '--font-display',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: 'fea-planner',
@@ -57,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="ar"
       dir="rtl"
       data-theme="dark"
-      className={`${cairo.variable} ${outfit.variable}`}
+      className={`${appFont.variable} ${displayFont.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-dvh bg-bg text-fg antialiased">

@@ -49,8 +49,7 @@ function Tick({ tone = 'var(--brand)' }: { tone?: string }) {
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
     <span
-      className="text-[11px] font-extrabold uppercase tracking-[0.14em]"
-      style={{ color: 'var(--brand)' }}
+      className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-[var(--fg-faint)]"
     >
       {children}
     </span>
@@ -87,9 +86,9 @@ export default function LandingPage() {
               {c.hero.badge}
             </span>
 
-            <h1 className="display mt-6 text-[2.5rem] font-extrabold leading-[1.08] sm:text-6xl">
+            <h1 className="display mt-6 text-[2.5rem] font-extrabold leading-[1.08] text-[var(--fg-dim)] sm:text-6xl">
               {c.hero.titleA}{' '}
-              <span style={{ color: 'var(--brand)' }}>{c.hero.titleAccent}</span>
+              <span className="text-[var(--fg)]">{c.hero.titleAccent}</span>
             </h1>
 
             <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-[var(--fg-dim)] sm:text-lg">
@@ -252,10 +251,7 @@ export default function LandingPage() {
           <div className="mt-10 rounded-2xl border border-[var(--line)] bg-[var(--card)] p-8 text-start sm:p-10">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
-                <div
-                  className="display text-xs font-extrabold uppercase tracking-wider"
-                  style={{ color: 'var(--brand)' }}
-                >
+                <div className="display text-xs font-extrabold uppercase tracking-wider text-[var(--fg-faint)]">
                   {c.pricing.plan}
                 </div>
                 <div className="mt-2 flex items-baseline gap-1.5">

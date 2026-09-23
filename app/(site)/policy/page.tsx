@@ -40,7 +40,7 @@ export default function PolicyPage() {
                     <span
                       aria-hidden="true"
                       className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full"
-                      style={{ background: 'var(--brand)' }}
+                      style={{ background: 'var(--fg-faint)' }}
                     />
                     {line}
                   </li>

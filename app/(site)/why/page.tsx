@@ -16,8 +16,7 @@ export default function WhyPage() {
             {c.why.title}
           </h1>
           <p
-            className="mt-5 text-lg leading-relaxed sm:text-xl"
-            style={{ color: 'var(--brand)' }}
+            className="mt-5 text-lg leading-relaxed text-[var(--fg-dim)] sm:text-xl"
           >
             {c.why.lede}
           </p>
@@ -30,8 +29,7 @@ export default function WhyPage() {
             <section key={s.title}>
               <div className="flex items-baseline gap-3">
                 <span
-                  className="display text-xs font-extrabold tabular-nums"
-                  style={{ color: 'var(--brand)' }}
+                  className="display text-xs font-extrabold tabular-nums text-[var(--fg-faint)]"
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>

@@ -21,8 +21,7 @@ export function TasksPreview() {
             <div className="p-1.5">
               <div className="h-1.5 w-2/3 rounded-full bg-[var(--line)]" />
               <div
-                className="mt-2 text-[13px] font-extrabold leading-none"
-                style={{ color: 'var(--brand)' }}
+                className="mt-2 text-[13px] font-extrabold leading-none text-[var(--fg)]"
               >
                 {pct}%
               </div>
@@ -105,8 +104,7 @@ export function YearPreview() {
               />
             </div>
             <span
-              className="w-8 text-end text-[10px] font-extrabold tabular-nums"
-              style={{ color: 'var(--brand)' }}
+              className="w-8 text-end text-[10px] font-extrabold tabular-nums text-[var(--fg-dim)]"
             >
               {pct}%
             </span>
