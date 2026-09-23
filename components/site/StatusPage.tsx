@@ -1,7 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import BrandMark from '@/components/BrandMark'
 import ThemeToggle from '@/components/ThemeToggle'
+import { BRAND } from '@/lib/brand'
 import { useCopy } from '@/lib/copy'
 import { I18nProvider, useI18n } from '@/lib/i18n'
 
@@ -62,13 +64,8 @@ function Inner({ kind, onRetry }: { kind: Kind; onRetry?: () => void }) {
 
       <div className="relative w-full max-w-lg text-center">
         <Link href="/" className="inline-flex items-center gap-2.5">
-          <span
-            className="grid h-9 w-9 place-items-center text-base font-extrabold"
-            style={{ background: 'var(--brand-solid)', color: 'var(--brand-ink)' }}
-          >
-            F
-          </span>
-          <span className="display text-[15px] font-extrabold">fea-planner</span>
+          <BrandMark />
+          <span className="display text-[15px] font-extrabold">{locale === 'ar' ? BRAND.ar : BRAND.en}</span>
         </Link>
 
         <p

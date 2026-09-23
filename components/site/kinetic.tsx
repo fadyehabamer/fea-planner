@@ -219,36 +219,39 @@ export function MegaMarquee({
 }
 
 /**
- * Headline whose words rise out of a mask in sequence. Screen readers get the
- * sentence once, from a visually hidden copy; the animated words are hidden
- * from them so the heading isn't read out word by word.
+ * Headline whose words rise out of a mask in sequence, with the accent phrase
+ * kept whole under a highlighter swipe. Screen readers get the sentence once,
+ * from a visually hidden copy; the animated words are hidden from them so the
+ * heading isn't read out word by word.
  */
 export function SplitHeadline({
   lead,
   accent,
+  tail = '',
   className = '',
 }: {
   lead: string
   accent: string
+  tail?: string
   className?: string
 }) {
+  const split = (t: string) => t.split(' ').filter(Boolean)
   const words = [
-    ...lead.split(' ').map((w) => ({ w, outline: false })),
-    ...accent.split(' ').map((w) => ({ w, outline: true })),
+    ...split(lead).map((w) => ({ w, mark: false })),
+    { w: accent, mark: true },
+    ...split(tail).map((w) => ({ w, mark: false })),
   ]
 
   return (
     <h1 className={className}>
-      <span className="sr-only">{`${lead} ${accent}`}</span>
+      <span className="sr-only">{[lead, accent, tail].filter(Boolean).join(' ')}</span>
       <span aria-hidden="true">
-        {words.map(({ w, outline }, i) => (
+        {words.map(({ w, mark }, i) => (
           <Fragment key={i}>
-            <span className="word-mask">
-              <span
-                className={`word ${outline ? 'outline-text' : ''}`}
-                style={{ '--i': i } as React.CSSProperties}
-              >
-                {w}
+            {/* The highlighter overhangs its words, so its mask gets side room. */}
+            <span className={`word-mask ${mark ? 'px-[0.14em] -mx-[0.14em]' : ''}`}>
+              <span className="word" style={{ '--i': i } as React.CSSProperties}>
+                {mark ? <span className="marker">{w}</span> : w}
               </span>
             </span>{' '}
           </Fragment>

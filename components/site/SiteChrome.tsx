@@ -2,22 +2,21 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import BrandMark from '@/components/BrandMark'
 import ScrollProgress from '@/components/site/ScrollProgress'
 import ThemeToggle from '@/components/ThemeToggle'
+import { BRAND } from '@/lib/brand'
 import { useCopy } from '@/lib/copy'
 import { useI18n } from '@/lib/i18n'
 
 function Wordmark({ size = 'md' }: { size?: 'md' | 'sm' }) {
-  const box = size === 'md' ? 'h-9 w-9 text-base' : 'h-7 w-7 text-xs'
+  const { locale } = useI18n()
   return (
     <span className="flex items-center gap-2.5">
-      <span
-        className={`grid ${box} place-items-center rounded-full font-extrabold`}
-        style={{ background: 'var(--brand-solid)', color: 'var(--brand-ink)' }}
-      >
-        F
+      <BrandMark className={size === 'md' ? 'h-9 w-9' : 'h-7 w-7'} />
+      <span className="display text-lg font-black tracking-tight">
+        {locale === 'ar' ? BRAND.ar : BRAND.en}
       </span>
-      <span className="display text-[15px] font-extrabold tracking-tight">fea-planner</span>
     </span>
   )
 }
@@ -45,7 +44,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
       <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--bg)]/90 backdrop-blur">
         <ScrollProgress />
         <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:px-6">
-          <Link href="/" aria-label="fea-planner">
+          <Link href="/" aria-label={locale === 'ar' ? BRAND.ar : BRAND.en}>
             <Wordmark />
           </Link>
 
@@ -89,14 +88,16 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
             <ThemeToggle />
             <Link
               href="/habits"
-              className="ms-1 hidden min-h-11 items-center rounded-full border px-5 text-sm font-bold transition-transform duration-200 hover:scale-[1.04] sm:inline-flex"
-              style={{
-                background: 'var(--brand-solid)',
-                color: 'var(--brand-ink)',
-                borderColor: 'var(--fg)',
-              }}
+              className="hidden min-h-11 items-center rounded-full px-4 text-sm font-semibold text-[var(--fg-dim)] transition-colors hover:text-[var(--fg)] md:inline-flex"
             >
               {c.nav.open}
+            </Link>
+            <Link
+              href="/login"
+              className="ms-1 inline-flex min-h-11 items-center rounded-full px-5 text-sm font-black transition-transform duration-200 hover:scale-[1.04]"
+              style={{ background: 'var(--pop)', color: 'var(--pop-ink)' }}
+            >
+              {c.nav.signIn}
             </Link>
           </div>
         </div>
@@ -104,7 +105,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
 
       <main id="main">{children}</main>
 
-      <footer className="border-t border-[var(--line-soft)] bg-[var(--bg-2)]">
+      <footer data-cta-zone className="border-t border-[var(--line-soft)] bg-[var(--bg-2)]">
         <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
             <div>
@@ -126,7 +127,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
             </nav>
           </div>
           <div className="mt-8 border-t border-[var(--line-soft)] pt-5 text-[11px] text-[var(--fg-faint)]">
-            © {new Date().getFullYear()} fea-planner · {c.footer.rights}
+            © {new Date().getFullYear()} {locale === 'ar' ? BRAND.ar : BRAND.en} · {c.footer.rights}
           </div>
         </div>
       </footer>

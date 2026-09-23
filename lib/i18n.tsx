@@ -6,7 +6,7 @@ export type Locale = 'ar' | 'en'
 
 export const dict = {
   ar: {
-    appName: 'fea-planner',
+    appName: 'دفتر',
     theme: 'المظهر',
     lightMode: 'فاتح',
     darkMode: 'داكن',
@@ -78,7 +78,7 @@ export const dict = {
     next: 'التالي',
   },
   en: {
-    appName: 'fea-planner',
+    appName: 'Daftar',
     theme: 'Theme',
     lightMode: 'Light',
     darkMode: 'Dark',

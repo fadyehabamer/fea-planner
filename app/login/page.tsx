@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { I18nProvider, useI18n } from '@/lib/i18n'
 import { createClient } from '@/lib/supabase/client'
 import ThemeToggle from '@/components/ThemeToggle'
+import BrandMark from '@/components/BrandMark'
 
 const CONFIGURED = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL)
 
@@ -34,9 +35,7 @@ function LoginForm() {
       <div className="w-full max-w-sm">
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--brand-solid)] text-lg font-extrabold text-[var(--brand-ink)]">
-              F
-            </span>
+            <BrandMark className="h-10 w-10" />
             <span className="text-lg font-extrabold">{t.appName}</span>
           </div>
           <div className="flex items-center gap-1.5">

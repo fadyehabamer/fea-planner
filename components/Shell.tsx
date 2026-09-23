@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import BrandMark from '@/components/BrandMark'
 import { usePathname, useRouter } from 'next/navigation'
 import { useI18n } from '@/lib/i18n'
 import { createClient } from '@/lib/supabase/client'
@@ -58,9 +59,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-40 border-b border-[var(--line-soft)] bg-[var(--bg)]/90 backdrop-blur">
         <div className="mx-auto flex max-w-[1400px] items-center gap-3 px-3 py-2.5 sm:px-5">
           <Link href="/habits" className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-[var(--brand-solid)] text-sm font-extrabold text-[var(--brand-ink)]">
-              F
-            </span>
+            <BrandMark className="h-8 w-8" />
             <span className="text-sm font-extrabold">{t.appName}</span>
           </Link>
 

@@ -36,6 +36,13 @@
   --brand-ink: #000000;
   --brand-glow: rgba(237, 237, 237, 0.05);
   --accent: #10b981;
+
+  /* The one colour on the marketing site: a highlighter lime. It is only ever
+     a fill under near-black ink (15:1), never text on the page background. */
+  --pop: #c6f432;
+  --pop-ink: #0a0a0a;
+  --pop-edge: #c6f432;
+  --pop-soft: rgba(198, 244, 50, 0.12);
 }
 
 :root[data-theme="light"] {
@@ -66,6 +73,13 @@
   --brand-ink: #ffffff;
   --brand-glow: rgba(10, 10, 10, 0.035);
   --accent: #047857;
+
+  /* Lime on white is too faint to see as a filled box on its own, so in the
+     light theme every lime fill also gets a darker olive edge. */
+  --pop: #c6f432;
+  --pop-ink: #0a0a0a;
+  --pop-edge: #6f8f00;
+  --pop-soft: rgba(111, 143, 0, 0.1);
 }
 
 @theme inline {
@@ -394,18 +408,6 @@ textarea::placeholder {
   }
 }
 
-/* --- pinned horizontal scroll. Scroll-linked sideways motion is exactly
-       what reduced-motion users opt out of, so they get a plain swipeable
-       strip instead of the pinned track. --- */
-@media (prefers-reduced-motion: reduce) {
-  .hpin-pinned {
-    display: none !important;
-  }
-  .hpin-strip {
-    display: block !important;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   body,
   .theme-fade,
@@ -417,13 +419,120 @@ textarea::placeholder {
   }
 }
 
+/* --- highlighter swipe behind a headline word --- */
+.marker {
+  position: relative;
+  z-index: 0;
+  white-space: nowrap;
+  color: var(--pop-ink);
+}
+.marker::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0.06em -0.12em 0.02em;
+  border-radius: 0.14em;
+  background: var(--pop);
+  transform-origin: 0 50%;
+}
+[dir='rtl'] .marker::before {
+  transform-origin: 100% 50%;
+}
+/* The swipe plays when its words arrive: after the hero headline rises, or
+   when a section's reveal fires. Until then the ink stays page-coloured so
+   the words are readable before the lime lands under them. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-item:not([data-in='true']) .marker::before {
+    transform: scaleX(0);
+  }
+  .word .marker,
+  .word .marker::before,
+  .reveal-item[data-in='true'] .marker,
+  .reveal-item[data-in='true'] .marker::before {
+    animation-duration: 700ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    animation-delay: var(--marker-delay, 250ms);
+    animation-fill-mode: both;
+  }
+  .word .marker,
+  .reveal-item[data-in='true'] .marker {
+    animation-name: markerInk;
+  }
+  .word .marker::before,
+  .reveal-item[data-in='true'] .marker::before {
+    animation-name: markerSwipe;
+  }
+  .word .marker {
+    --marker-delay: 700ms;
+  }
+  .word .marker::before {
+    --marker-delay: 700ms;
+  }
+}
+@keyframes markerSwipe {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes markerInk {
+  from {
+    color: var(--fg);
+  }
+}
+
+/* --- a box being ticked in the demo --- */
+@media (prefers-reduced-motion: no-preference) {
+  .tick-in {
+    animation: tickIn 360ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .nudge-in {
+    animation: nudgeIn 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .pulse-ring {
+    animation: pulseRing 2.4s ease-out infinite;
+  }
+}
+@keyframes tickIn {
+  0% {
+    transform: scale(0.6);
+  }
+  60% {
+    transform: scale(1.14);
+  }
+}
+@keyframes nudgeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+}
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--pop) 55%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+}
+
+/* --- mobile sticky call to action, slid in once the hero is gone --- */
+.sticky-cta {
+  transform: translateY(120%);
+  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sticky-cta[data-show='true'] {
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta {
+    transition: none;
+  }
+}
+
 @media print {
   .no-print {
     display: none !important;
   }
 }
 
-/* The "keep scrolling" hint belongs to the pinned track only. */
-.hpin-strip .hpin-hint {
-  display: none !important;
-}

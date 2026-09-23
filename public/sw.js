@@ -1,7 +1,7 @@
 // Minimal service worker: makes the app installable and keeps the shell usable
 // on a flaky connection. Deliberately conservative — pages are user-specific and
 // auth-gated, so navigations always try the network first.
-const CACHE = 'planner-v1'
+const CACHE = 'planner-v2'
 const PRECACHE = ['/icons/icon-192.png', '/icons/icon-512.png', '/manifest.webmanifest']
 
 self.addEventListener('install', (event) => {

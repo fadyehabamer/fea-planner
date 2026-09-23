@@ -1,19 +1,20 @@
 import type { Metadata, Viewport } from 'next'
 import RegisterSW from '@/components/RegisterSW'
 import { arabicFont, latinFont } from '@/lib/fonts'
+import { BRAND } from '@/lib/brand'
 import { ThemeProvider } from '@/lib/theme'
 import { THEME_COLORS, THEME_KEY } from '@/lib/theme-constants'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'fea-planner',
+  title: BRAND.both,
   description:
-    'متتبع العادات والنوم والمهام والأهداف — شهرك كله في شاشة واحدة. Habit, sleep, task and goal planner.',
+    'دوسة واحدة في اليوم، وشهرك كله قدامك: العادات والنوم والمهام والأهداف. One tap a day — habits, sleep, tasks and goals on one monthly page. Free.',
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'fea-planner',
+    title: BRAND.en,
   },
   icons: {
     icon: '/icons/icon-192.png',
@@ -49,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Scroll reveals are driven by IntersectionObserver. Without JS nothing
             would ever flip them visible, so opt out of hiding them entirely. */}
         <noscript>
-          <style>{'.reveal-item{opacity:1!important;transform:none!important}'}</style>
+          <style>{'.reveal-item{opacity:1!important;transform:none!important}.marker::before{transform:none!important}'}</style>
         </noscript>
         <ThemeProvider>{children}</ThemeProvider>
         <RegisterSW />

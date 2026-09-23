@@ -14,130 +14,37 @@ const ar = {
   nav: { why: 'ليه', privacy: 'الخصوصية', open: 'افتح التطبيق', signIn: 'ابدأ مجانًا' },
 
   hero: {
-    badge: 'مجاني · بدون إعلانات · بدون تتبّع',
-    titleA: 'شهرك كله في',
-    titleAccent: 'شاشة واحدة',
-    sub: 'متتبّع للعادات والنوم والمهام والأهداف. دوسة واحدة على المربع، والنسبة بتتحسب لوحدها — على الموبايل واللابتوب بنفس الحساب.',
-    ctaPrimary: 'ابدأ مجانًا',
-    ctaSecondary: 'ليه التطبيق ده؟',
-    trust: ['١٥ عادة × كل يوم في الشهر', 'عربي وإنجليزي', 'بياناتك ليك إنت بس'],
+    badge: 'مجاني للأبد · من غير كارت · عربي وإنجليزي',
+    titleA: 'بطّل تبدأ',
+    titleAccent: 'من الأول',
+    titleB: 'كل أسبوع.',
+    sub: 'دفتر بيحط عاداتك ونومك ومهامك وأهدافك في صفحة واحدة للشهر كله — فتشوف النمط قبل ما تزهق وتسيب. دوسة واحدة في اليوم، وبس.',
+    ctaPrimary: 'ابدأ دفترك مجانًا',
+    ctaSecondary: 'بيشتغل إزاي؟',
+    micro: 'إيميلك بس. من غير باسورد. أقل من ١٠ ثواني.',
+    proof: ['بدون إعلانات', 'بيشتغل من غير نت', 'موبايل ولابتوب', 'بياناتك ليك بس'],
   },
 
-  tools: {
-    title: 'أربع أدوات، ملف واحد',
-    sub: 'مش محتاج أربع تطبيقات. كله مترابط ببعضه.',
-    items: [
-      {
-        name: 'متتبع العادات والنوم',
-        desc: 'شبكة الشهر كله: ١٥ عادة في كل يوم، كل أسبوع بلون، ونسبة كل عادة بتتحسب لوحدها.',
-        points: ['ساعات نومك كل يوم ومتوسط الشهر', 'أكتر ٥ عادات التزامًا', 'تقدمك أسبوع بأسبوع'],
-      },
-      {
-        name: 'متتبع المهام',
-        desc: 'أسبوع كامل قدامك، لحد ١٤ مهمة لليوم، ونسبة الإنجاز لكل يوم وللأسبوع كله.',
-        points: ['كل يوم بلونه', 'اكتب وامسح بسرعة', 'إجمالي الأسبوع في سطر'],
-      },
-      {
-        name: 'متتبع الأهداف',
-        desc: 'ستة أهداف للسنة، كل هدف مقسّم لعشر خطوات عشان تبقى قابلة للتنفيذ.',
-        points: ['٦ أهداف × ١٠ خطوات', 'نسبة لكل هدف', 'تنقل بين السنين'],
-      },
-      {
-        name: 'الملخص السنوي',
-        desc: 'الاتناشر شهر جنب بعض: المكتمل والمستهدف والنسبة ومتوسط النوم.',
-        points: ['مقارنة شهر بشهر', 'إجمالي السنة', 'رسم بياني للتقدم'],
-      },
-    ],
+  demo: {
+    label: 'جرّبه هنا',
+    title: 'دوس على مربعات النهاردة',
+    habits: ['قراية ٢٠ دقيقة', 'تمرين', 'لترين مية', 'نوم قبل ١٢', 'من غير موبايل في السرير'],
+    days: ['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س'],
+    daysFull: ['الأحد', 'الاتنين', 'التلات', 'الأربع', 'الخميس', 'الجمعة', 'السبت'],
+    today: 'النهاردة',
+    week: 'الأسبوع ده',
+    nudgeTitle: 'هي دي العادة كلها.',
+    nudgeBody: 'دلوقتي تخيّل الشهر كله قدامك بالشكل ده. كمّل في دفترك إنت — مجانًا.',
+    nudgeCta: 'اعمل دفتري',
+    reset: 'ابدأ من جديد',
   },
 
-  how: {
-    title: 'بتشتغل إزاي',
-    steps: [
-      {
-        title: 'اكتب عاداتك مرة واحدة',
-        desc: 'خمستاشر عادة بالعربي والإنجليزي، وتحدد هدف كل واحدة في الشهر. وتفضل معاك كل الشهور.',
-      },
-      {
-        title: 'دوس على المربع كل يوم',
-        desc: 'ثانية واحدة. التطبيق بيحسب النسب والمتوسطات والأسابيع من غير ما تعمل حاجة.',
-      },
-      {
-        title: 'بصّ على الشهر كله',
-        desc: 'تشوف الحلو من الوحش في نظرة واحدة، وتعرف أنهي عادة ماشية وأنهي محتاجة شغل.',
-      },
-    ],
-  },
-
-  built: {
-    title: 'مبني كده من الأول',
-    items: [
-      {
-        title: 'عربي وإنجليزي',
-        desc: 'تبديل فوري بين اللغتين، والاتجاه بيتظبط لوحده. مش ترجمة مركّبة بعدين.',
-      },
-      {
-        title: 'فاتح وداكن',
-        desc: 'مظهرين متظبطين واحد واحد، والاختيار بيتحفظ على جهازك من غير وميض وقت الفتح.',
-      },
-      {
-        title: 'بيتثبّت زي أي تطبيق',
-        desc: 'ضيفه على شاشة موبايلك ويفتح من غير شريط المتصفح، ويشتغل على اللابتوب بنفس الرابط.',
-      },
-      {
-        title: 'بياناتك معزولة',
-        desc: 'كل صف في قاعدة البيانات مربوط بحسابك على مستوى قاعدة البيانات نفسها، مش بس في الكود.',
-      },
-    ],
-  },
-
-  cta: {
-    title: 'ابدأ الشهر الجاي بشكل مختلف',
-    sub: 'حساب مجاني بالإيميل. من غير باسورد ومن غير كارت.',
-    button: 'ابدأ مجانًا',
-    note: 'بندخّلك برابط على إيميلك.',
-  },
-
-  stats: [
-    { value: '465', label: 'نقطة بيانات في الشهر' },
-    { value: '4', label: 'أدوات في ملف واحد' },
-    { value: '2', label: 'لغة بالكامل' },
-    { value: '0', label: 'جنيه، للأبد' },
-  ],
-
-  features: [
-    {
-      eyebrow: 'العادات والنوم',
-      title: 'الشهر كله، مش النهاردة بس',
-      body: 'شبكة واحدة فيها ١٥ عادة في كل يوم من أيام الشهر. كل أسبوع بلون، وكل عادة ليها نسبتها، وساعات نومك تحت في نفس الشاشة — عشان تشوف العلاقة بين نومك وباقي يومك من غير ما تدوّر.',
-      points: [
-        'نسبة لكل عادة مقابل هدفها الشهري',
-        'صف للنوم كل ليلة ومتوسط الشهر',
-        'أكتر ٥ عادات التزامًا وتقدمك أسبوع بأسبوع',
-      ],
-    },
-    {
-      eyebrow: 'المهام',
-      title: 'أسبوع تقدر تخطّطه فعلًا',
-      body: 'سبع أعمدة قدامك، لحد ١٤ مهمة لليوم. كل يوم بلونه ونسبته، وفي الآخر سطر واحد بيقولك عملت كام من كام في الأسبوع كله.',
-      points: ['نسبة إنجاز لكل يوم', 'إجمالي الأسبوع في سطر', 'إضافة ومسح سريع من غير نوافذ'],
-    },
-    {
-      eyebrow: 'الأهداف والسنة',
-      title: 'أهداف مقسّمة، وسنة تقدر تقارنها',
-      body: 'ستة أهداف للسنة، كل واحد مقسوم لعشر خطوات — لإن «أتعلم لغة» مش مهمة، دي عشر مهام. والملخص السنوي بيحط الاتناشر شهر جنب بعض عشان تشوف فين اتحسنت وفين وقعت.',
-      points: [
-        '٦ أهداف × ١٠ خطوات لكل سنة',
-        'الاتناشر شهر: المكتمل والمستهدف والنسبة',
-        'متوسط النوم لكل شهر ورسم بياني للسنة',
-      ],
-    },
-  ],
-
-  compare: {
-    title: 'بدل أربع تطبيقات',
-    sub: 'كل حاجة من دول بتعيش في مكان لوحدها. هنا بيعيشوا في ملف واحد.',
+  pain: {
+    title: 'التطبيقات بتوريك النهاردة بس.',
+    accent: 'والنهاردة بيكدب.',
+    sub: 'يوم وحش واحد بيحسسك إنك فشلت، فبتسيب. لكن لما تشوف ٣١ يوم جنب بعض، بتلاقي إنك ماشي أحسن ما كنت فاكر — وبتعرف بالظبط إيه اللي بيوقعك.',
     beforeLabel: 'اللي بتستخدمه دلوقتي',
-    afterLabel: 'fea-planner',
+    afterLabel: 'دفتر',
     before: [
       'تطبيق عادات بيوريك النهاردة بس',
       'تطبيق مهام منفصل تمامًا',
@@ -152,23 +59,68 @@ const ar = {
     ],
   },
 
+  how: {
+    title: 'تلات خطوات. من غير وجع دماغ.',
+    steps: [
+      {
+        title: 'اكتب عاداتك مرة واحدة',
+        desc: 'لحد ١٥ عادة بالعربي أو الإنجليزي، وهدف لكل واحدة في الشهر. وبتفضل معاك كل الشهور.',
+      },
+      {
+        title: 'دوس على المربع كل يوم',
+        desc: 'ثانية واحدة. النسب والمتوسطات والأسابيع بتتحسب لوحدها.',
+      },
+      {
+        title: 'شوف الشهر كله',
+        desc: 'تعرف أنهي عادة ماشية وأنهي محتاجة شغل — في نظرة واحدة.',
+      },
+    ],
+  },
+
+  features: [
+    {
+      eyebrow: 'العادات والنوم',
+      title: 'الشهر كله، مش النهاردة بس',
+      body: 'شبكة واحدة فيها ١٥ عادة في كل يوم من أيام الشهر، وساعات نومك تحتها في نفس الشاشة — عشان تشوف العلاقة بين نومك وباقي يومك من غير ما تدوّر.',
+      points: [
+        'نسبة لكل عادة مقابل هدفها الشهري',
+        'صف للنوم كل ليلة ومتوسط الشهر',
+        'أكتر ٥ عادات التزامًا وتقدمك أسبوع بأسبوع',
+      ],
+    },
+    {
+      eyebrow: 'المهام',
+      title: 'أسبوع تقدر تخطّطه فعلًا',
+      body: 'سبع أعمدة قدامك، لحد ١٤ مهمة لليوم. كل يوم بنسبته، وفي الآخر سطر واحد بيقولك عملت كام من كام.',
+      points: ['نسبة إنجاز لكل يوم', 'إجمالي الأسبوع في سطر', 'إضافة ومسح سريع من غير نوافذ'],
+    },
+    {
+      eyebrow: 'الأهداف والسنة',
+      title: 'أهداف مقسّمة، وسنة تقدر تقارنها',
+      body: 'ستة أهداف للسنة، كل واحد مقسوم لعشر خطوات — لإن «أتعلم لغة» مش مهمة، دي عشر مهام. والملخص السنوي بيحط الاتناشر شهر جنب بعض.',
+      points: [
+        '٦ أهداف × ١٠ خطوات لكل سنة',
+        'الاتناشر شهر: المكتمل والمستهدف والنسبة',
+        'متوسط النوم لكل شهر ورسم بياني للسنة',
+      ],
+    },
+  ],
+
   pricing: {
-    title: 'التسعير',
-    sub: 'مفيش خطط ولا ترقيات ولا حاجة مقفولة.',
-    plan: 'مجاني',
-    price: '0',
-    currency: 'ج.م',
+    title: 'مجاني.',
+    accent: 'مش «تجربة مجانية».',
+    sub: 'مفيش خطط ولا ترقيات ولا حاجة مقفولة ورا دفع.',
+    price: '٠',
     period: 'للأبد',
     includes: [
-      'الأربع أدوات كاملة من غير أي قيود',
+      'الأربع أدوات كاملة من غير قيود',
       'مزامنة بين الموبايل واللابتوب',
       'عربي وإنجليزي، فاتح وداكن',
-      'تثبيت على شاشة الموبايل',
+      'بيتثبّت على شاشة الموبايل',
       'بدون إعلانات وبدون تتبّع',
       'بياناتك معزولة على مستوى قاعدة البيانات',
     ],
     cta: 'ابدأ دلوقتي',
-    note: 'ده مشروع شخصي شغال على الباقات المجانية. مفيش نية نحطّ حاجة ورا دفع، ولو ده اتغير يومًا هتعرف قبلها.',
   },
 
   faq: {
@@ -176,38 +128,42 @@ const ar = {
     items: [
       {
         q: 'مجاني بجد؟',
-        a: 'أيوه. مفيش نسخة مدفوعة ولا تجربة مجانية ولا كارت. المشروع شغال على الباقة المجانية في Vercel و Supabase، وده كفاية للاستخدام الشخصي.',
+        a: 'أيوه. مفيش نسخة مدفوعة ولا تجربة مجانية ولا كارت. المشروع شغال على باقات مجانية تكفي الاستخدام الشخصي براحة.',
       },
       {
         q: 'محتاج أنزّل حاجة؟',
-        a: 'لأ. بيشتغل في المتصفح على أي جهاز. ولو حبيت، تقدر تضيفه على شاشة موبايلك من قايمة المشاركة وهيفتح من غير شريط المتصفح زي أي تطبيق.',
-      },
-      {
-        q: 'أقدر أستخدمه بالعربي؟',
-        a: 'التطبيق كله بالعربي والإنجليزي، والاتجاه بيتظبط لوحده. تقدر تقلب بين اللغتين في أي وقت من زرار في الأعلى، والاختيار بيتحفظ على جهازك.',
-      },
-      {
-        q: 'مين يقدر يشوف بياناتي؟',
-        a: 'إنت بس. كل صف في قاعدة البيانات مربوط بحسابك بسياسة أمان جوه قاعدة البيانات نفسها، مش في الكود — يعني حتى لو فيه غلطة برمجية، حساب تاني مش هيقدر يقرا بياناتك.',
+        a: 'لأ. بيشتغل في المتصفح على أي جهاز. ولو حبيت، ضيفه على شاشة موبايلك من قايمة المشاركة وهيفتح زي أي تطبيق.',
       },
       {
         q: 'لو فاتني يوم؟',
-        a: 'مفيش حاجة بتتكسر. مفيش سلاسل ولا إشعارات ولا شارات. اليوم اللي فات بيفضل مربع فاضي، والنسبة رقم محايد بيقولك المعلومة من غير ما يحسّسك بذنب.',
+        a: 'مفيش حاجة بتتكسر. مفيش سلاسل ولا إشعارات بتزنّ. اليوم اللي فات بيفضل مربع فاضي، والنسبة رقم محايد من غير ما يحسّسك بذنب.',
       },
       {
-        q: 'أقدر أغيّر الـ١٥ عادة؟',
-        a: 'أيوه، من صفحة الإعدادات. تكتبهم بالعربي والإنجليزي وتحدد هدف كل واحدة في الشهر، وتقدر تقفل أي عادة مش محتاجها. وبيفضلوا معاك في كل الشهور.',
+        q: 'مين يقدر يشوف بياناتي؟',
+        a: 'إنت بس. كل صف مربوط بحسابك بسياسة أمان جوه قاعدة البيانات نفسها — حتى لو فيه غلطة في الكود، حساب تاني مش هيقدر يقرا بياناتك.',
+      },
+      {
+        q: 'أقدر أغيّر العادات؟',
+        a: 'أيوه، من الإعدادات. اكتبهم بالعربي والإنجليزي وحدد هدف كل واحدة، واقفل أي عادة مش محتاجها.',
       },
     ],
   },
 
+  cta: {
+    title: 'الشهر الجاي بيبدأ',
+    accent: 'بدوسة واحدة.',
+    sub: 'اعمل دفترك في أقل من ١٠ ثواني. إيميلك بس — من غير باسورد ومن غير كارت.',
+    button: 'ابدأ دفترك مجانًا',
+    note: 'بنبعتلك رابط دخول على إيميلك.',
+  },
+
+  sticky: 'ابدأ مجانًا',
 
   kinetic: {
     marquee: ['العادات', 'النوم', 'المهام', 'الأهداف', 'السنة'],
-    scroll: 'كمّل تمرير',
   },
 
-  footer: { tagline: 'متتبّع العادات والنوم والمهام والأهداف.', rights: 'كل الحقوق محفوظة.' },
+  footer: { tagline: 'دوسة واحدة في اليوم، وشهرك كله في صفحة.', rights: 'كل الحقوق محفوظة.' },
 
   why: {
     title: 'ليه فيه تطبيق تاني للعادات؟',
@@ -300,138 +256,37 @@ const en = {
   nav: { why: 'Why', privacy: 'Privacy', open: 'Open app', signIn: 'Start free' },
 
   hero: {
-    badge: 'Free · No ads · No tracking',
-    titleA: 'Your whole month on',
-    titleAccent: 'one screen',
-    sub: 'A tracker for habits, sleep, tasks and goals. Tap the box, the percentages work themselves out — on your phone and your laptop, same account.',
-    ctaPrimary: 'Start free',
-    ctaSecondary: 'Why this exists',
-    trust: ['15 habits × every day of the month', 'Arabic and English', 'Your data stays yours'],
+    badge: 'Free forever · No card · Arabic & English',
+    titleA: 'Stop',
+    titleAccent: 'starting over',
+    titleB: 'every Monday.',
+    sub: 'Daftar puts your habits, sleep, tasks and goals on one page for the whole month — so you see the pattern before you give up. One tap a day. That is it.',
+    ctaPrimary: 'Start your Daftar free',
+    ctaSecondary: 'How it works',
+    micro: 'Just your email. No password. Under 10 seconds.',
+    proof: ['No ads', 'Works offline', 'Phone + laptop', 'Your data stays yours'],
   },
 
-  tools: {
-    title: 'Four tools, one file',
-    sub: 'You do not need four apps. Everything connects.',
-    items: [
-      {
-        name: 'Habits & sleep',
-        desc: 'The whole month as a grid: 15 habits across every day, a colour per week, and a rate per habit that counts itself.',
-        points: [
-          'Sleep hours per night and a monthly average',
-          'Your five most consistent habits',
-          'Week-by-week progress',
-        ],
-      },
-      {
-        name: 'Task tracker',
-        desc: 'A full week at a glance, up to 14 tasks a day, with a completion rate per day and for the week.',
-        points: ['A colour per day', 'Type and clear quickly', 'Week total in one line'],
-      },
-      {
-        name: 'Goal tracker',
-        desc: 'Six goals for the year, each broken into ten steps so they stay something you can actually do.',
-        points: ['6 goals × 10 steps', 'A rate per goal', 'Move between years'],
-      },
-      {
-        name: 'Yearly summary',
-        desc: 'All twelve months side by side: completed, target, rate and average sleep.',
-        points: ['Month against month', 'Year total', 'Progress chart'],
-      },
-    ],
+  demo: {
+    label: 'Try it right here',
+    title: "Tap today's boxes",
+    habits: ['Read 20 min', 'Workout', 'Drink 2L water', 'Asleep by 12', 'No phone in bed'],
+    days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+    daysFull: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    today: 'Today',
+    week: 'This week',
+    nudgeTitle: 'That is the whole habit.',
+    nudgeBody: 'Now picture your whole month like this. Keep going in your own Daftar — free.',
+    nudgeCta: 'Make my Daftar',
+    reset: 'Start over',
   },
 
-  how: {
-    title: 'How it works',
-    steps: [
-      {
-        title: 'Write your habits once',
-        desc: 'Fifteen habits in Arabic and English, each with a monthly target. They carry across every month from then on.',
-      },
-      {
-        title: 'Tap a box each day',
-        desc: 'One second. Rates, averages and weekly bands are all worked out for you.',
-      },
-      {
-        title: 'Look at the whole month',
-        desc: 'See the good weeks and the bad ones at a glance, and which habit is drifting.',
-      },
-    ],
-  },
-
-  built: {
-    title: 'Built this way from the start',
-    items: [
-      {
-        title: 'Arabic and English',
-        desc: 'Switch instantly; direction follows. Not a translation layer bolted on afterwards.',
-      },
-      {
-        title: 'Light and dark',
-        desc: 'Two themes tuned separately. Your choice is remembered per device, with no flash on load.',
-      },
-      {
-        title: 'Installs like an app',
-        desc: 'Add it to your home screen and it opens without browser chrome. Same URL on your laptop.',
-      },
-      {
-        title: 'Your rows are sealed off',
-        desc: 'Every row is tied to your account by a database policy, not just by application code.',
-      },
-    ],
-  },
-
-  cta: {
-    title: 'Start next month differently',
-    sub: 'A free account with your email. No password, no card.',
-    button: 'Start free',
-    note: 'We sign you in with a link sent to your inbox.',
-  },
-
-  stats: [
-    { value: '465', label: 'data points a month' },
-    { value: '4', label: 'trackers in one file' },
-    { value: '2', label: 'languages, fully' },
-    { value: '0', label: 'cost, forever' },
-  ],
-
-  features: [
-    {
-      eyebrow: 'Habits & sleep',
-      title: 'The month, not just today',
-      body: 'One grid holds 15 habits across every day of the month. A colour per week, a rate per habit, and your sleep hours on the same screen — so the link between how you slept and how the rest of the day went is right there, not buried in another app.',
-      points: [
-        'A rate per habit against its monthly target',
-        'A sleep row per night and a monthly average',
-        'Your five most consistent habits, and week-by-week progress',
-      ],
-    },
-    {
-      eyebrow: 'Tasks',
-      title: 'A week you can actually plan',
-      body: 'Seven columns in front of you, up to 14 tasks a day. Each day gets a colour and a completion rate, and one line at the bottom tells you how much of the week you actually finished.',
-      points: [
-        'A completion rate per day',
-        'Week total in a single line',
-        'Add and clear quickly, no dialogs',
-      ],
-    },
-    {
-      eyebrow: 'Goals & the year',
-      title: 'Goals broken down, years you can compare',
-      body: 'Six goals a year, each split into ten steps — because "learn a language" is not a task, it is ten of them. The yearly summary then puts all twelve months side by side, so you can see where you improved and where you slipped.',
-      points: [
-        '6 goals × 10 steps per year',
-        'Twelve months: completed, target and rate',
-        'Average sleep per month, and a chart for the year',
-      ],
-    },
-  ],
-
-  compare: {
-    title: 'Instead of four apps',
-    sub: 'Each of these normally lives somewhere else. Here they live in one file.',
+  pain: {
+    title: 'Habit apps show you today.',
+    accent: 'Today lies.',
+    sub: 'One bad day feels like failing, so you quit. Put 31 days side by side and you find you are doing better than you thought — and exactly what keeps tripping you up.',
     beforeLabel: 'What you use now',
-    afterLabel: 'fea-planner',
+    afterLabel: 'Daftar',
     before: [
       'A habit app that only shows today',
       'A separate to-do app',
@@ -446,12 +301,62 @@ const en = {
     ],
   },
 
+  how: {
+    title: 'Three steps. Zero setup pain.',
+    steps: [
+      {
+        title: 'Write your habits once',
+        desc: 'Up to 15 habits in Arabic or English, each with a monthly target. They carry across every month.',
+      },
+      {
+        title: 'Tap a box each day',
+        desc: 'One second. Rates, averages and weekly progress work themselves out.',
+      },
+      {
+        title: 'See the whole month',
+        desc: 'Which habit is holding and which one is drifting — at a single glance.',
+      },
+    ],
+  },
+
+  features: [
+    {
+      eyebrow: 'Habits & sleep',
+      title: 'The month, not just today',
+      body: 'One grid holds 15 habits across every day of the month, with your sleep hours right underneath — so the link between how you slept and how the day went is right there.',
+      points: [
+        'A rate per habit against its monthly target',
+        'A sleep row per night and a monthly average',
+        'Your five most consistent habits, week by week',
+      ],
+    },
+    {
+      eyebrow: 'Tasks',
+      title: 'A week you can actually plan',
+      body: 'Seven columns, up to 14 tasks a day. Each day gets a completion rate, and one line at the bottom tells you how much of the week you finished.',
+      points: [
+        'A completion rate per day',
+        'Week total in a single line',
+        'Add and clear quickly, no dialogs',
+      ],
+    },
+    {
+      eyebrow: 'Goals & the year',
+      title: 'Goals broken down, years you can compare',
+      body: 'Six goals a year, each split into ten steps — because "learn a language" is not a task, it is ten of them. The yearly view puts all twelve months side by side.',
+      points: [
+        '6 goals × 10 steps per year',
+        'Twelve months: completed, target and rate',
+        'Average sleep per month, and a chart for the year',
+      ],
+    },
+  ],
+
   pricing: {
-    title: 'Pricing',
-    sub: 'No plans, no upgrades, nothing held back.',
-    plan: 'Free',
-    price: '0',
-    currency: '$',
+    title: 'Free.',
+    accent: 'Not "free trial" free.',
+    sub: 'No plans, no upgrades, nothing held behind a paywall.',
+    price: '$0',
     period: 'forever',
     includes: [
       'All four trackers, no limits',
@@ -462,7 +367,6 @@ const en = {
       'Your rows sealed off at the database level',
     ],
     cta: 'Start now',
-    note: 'This is a personal project running on free tiers. There is no plan to put anything behind a paywall, and if that ever changed you would hear about it first.',
   },
 
   faq: {
@@ -470,38 +374,42 @@ const en = {
     items: [
       {
         q: 'Is it really free?',
-        a: 'Yes. There is no paid tier, no trial and no card. It runs on the Vercel and Supabase free tiers, which comfortably covers personal use.',
+        a: 'Yes. There is no paid tier, no trial and no card. It runs on free tiers that comfortably cover personal use.',
       },
       {
         q: 'Do I need to install anything?',
-        a: 'No. It runs in the browser on any device. If you want, add it to your home screen from the share menu and it opens without browser chrome, like any other app.',
-      },
-      {
-        q: 'Can I use it in Arabic?',
-        a: 'The whole app is in Arabic and English, and the layout direction follows. Switch between them any time from the header; your choice is remembered on that device.',
-      },
-      {
-        q: 'Who can see my data?',
-        a: 'Only you. Every row is tied to your account by a security policy inside the database itself, not in application code — so even a bug in the app cannot show your rows to another account.',
+        a: 'No. It runs in the browser on any device. If you like, add it to your home screen from the share menu and it opens like any other app.',
       },
       {
         q: 'What if I miss a day?',
-        a: 'Nothing breaks. There are no streaks, no notifications and no badges. A missed day stays an empty box, and the percentage is a neutral number that tells you the fact without making you feel bad about it.',
+        a: 'Nothing breaks. No streaks, no nagging notifications. A missed day stays an empty box, and the percentage is a neutral number — no guilt trip.',
       },
       {
-        q: 'Can I change the 15 habits?',
-        a: 'Yes, from the settings page. Write them in Arabic and English, set a monthly target for each, and switch off any you do not need. They then carry across every month.',
+        q: 'Who can see my data?',
+        a: 'Only you. Every row is tied to your account by a security policy inside the database itself — even a bug in the app cannot show your rows to another account.',
+      },
+      {
+        q: 'Can I change the habits?',
+        a: 'Yes, from settings. Write them in Arabic and English, set a monthly target for each, and switch off any you do not need.',
       },
     ],
   },
 
+  cta: {
+    title: 'Next month starts',
+    accent: 'with one tap.',
+    sub: 'Set up your Daftar in under 10 seconds. Just your email — no password, no card.',
+    button: 'Start your Daftar free',
+    note: 'We sign you in with a link sent to your inbox.',
+  },
+
+  sticky: 'Start free',
 
   kinetic: {
     marquee: ['Habits', 'Sleep', 'Tasks', 'Goals', 'The year'],
-    scroll: 'Keep scrolling',
   },
 
-  footer: { tagline: 'Habit, sleep, task and goal tracker.', rights: 'All rights reserved.' },
+  footer: { tagline: 'One tap a day. Your whole month on one page.', rights: 'All rights reserved.' },
 
   why: {
     title: 'Why another habit tracker?',
