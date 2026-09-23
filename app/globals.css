@@ -1,26 +1,185 @@
 @import "tailwindcss";
 
+/* ---------- dark (default) ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+
+  --bg: #0a1020;
+  --bg-2: #0f1729;
+  --card: #151d33;
+  --card-2: #1b2440;
+  --line: #243050;
+  --line-soft: #1c2745;
+  --row-alt: #0e1526;
+  --field: #0f1729;
+  --fg: #e9edf9;
+  --fg-dim: #97a3c0;
+  --fg-faint: #64718f;
+  --shadow: rgba(0, 0, 0, 0.45);
+
+  --w1: #8b5cf6;
+  --w2: #3b82f6;
+  --w3: #10b981;
+  --w4: #ef4444;
+  --w5: #ec4899;
+  --amber: #f59e0b;
+
+  /* Brand: warm amber for chrome and CTAs, emerald as the supporting accent.
+     Separate from --w1..--w5, which are data colours for the week bands. */
+  --brand: #fbbf24;
+  --brand-solid: #f59e0b;
+  --brand-ink: #1a1205;
+  --accent: #34d399;
+  --brand-glow: rgba(245, 158, 11, 0.14);
+}
+
+/* ---------- light ----------
+   Accents are a shade deeper than the dark theme's: the same hues stay vivid as
+   fills, but these also have to carry small text on white. */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #f4f6fb;
+  --bg-2: #ffffff;
+  --card: #ffffff;
+  --card-2: #eef2fa;
+  --line: #d5deee;
+  --line-soft: #e6ebf5;
+  --row-alt: #f7f9fd;
+  --field: #eef3fa;
+  --fg: #0f172e;
+  --fg-dim: #4b5a7a;
+  --fg-faint: #8190ad;
+  --shadow: rgba(15, 23, 46, 0.18);
+
+  --w1: #7c3aed;
+  --w2: #2563eb;
+  --w3: #059669;
+  --w4: #dc2626;
+  --w5: #db2777;
+  --amber: #d97706;
+
+  /* Amber-700 rather than -600: it has to clear 4.5:1 against white for
+     button labels and body-sized accent text, and -600 does not. */
+  --brand: #b45309;
+  --brand-solid: #b45309;
+  --brand-ink: #ffffff;
+  --accent: #047857;
+  --brand-glow: rgba(180, 83, 9, 0.10);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg-2);
+  --color-card: var(--card);
+  --color-card2: var(--card-2);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-dim: var(--fg-dim);
+  --color-faint: var(--fg-faint);
+  --font-sans: var(--font-app);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* { -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-app), system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Keep content clear of the iOS home indicator when installed to the home screen. */
+  padding-bottom: env(safe-area-inset-bottom);
+  overscroll-behavior-y: none;
+}
+
+/* Ease the switch between themes without animating layout. */
+body, .theme-fade {
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body, .theme-fade, .cell-btn { transition: none; }
+}
+
+/* The monthly grid is intentionally wider than a phone — scroll it, do not squeeze it. */
+.scroll-x {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+.scroll-x::-webkit-scrollbar { height: 8px; }
+.scroll-x::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 999px;
+}
+.scroll-x::-webkit-scrollbar-track { background: transparent; }
+
+/* The habit-name column stays pinned while the 31 day columns slide under it.
+   No background here on purpose: this rule is unlayered and would outrank
+   Tailwind's layered utilities, so each cell sets its own surface inline. */
+.sticky-col {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 20;
+}
+
+.cell-btn {
+  transition: transform 90ms ease, background-color 120ms ease, border-color 120ms ease;
+}
+.cell-btn:active { transform: scale(0.88); }
+
+input, textarea, select { font: inherit; }
+
+input::placeholder, textarea::placeholder { color: var(--fg-faint); }
+
+/* iOS zooms the page when a focused input is under 16px. */
+@media (max-width: 640px) {
+  input, textarea, select { font-size: 16px; }
+}
+
+@media print {
+  .no-print { display: none !important; }
+}
+
+/* ---------- marketing pages ---------- */
+
+/* Warm radial wash behind the hero. Amber, low alpha, and explicitly not the
+   blue/violet gradient every SaaS landing page reaches for. */
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 32rem at 50% -8rem, var(--brand-glow), transparent 70%),
+    radial-gradient(40rem 24rem at 85% 10%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 70%);
+}
+
+.display {
+  font-family: var(--font-display), var(--font-app), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Arabic needs the looser tracking and taller line box that Latin does not. */
+[dir="rtl"] .display {
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.rule {
+  height: 1px;
+  background: linear-gradient(to left, transparent, var(--line), transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: reveal 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
 }
