@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import RegisterSW from '@/components/RegisterSW'
-import { appFont, displayFont } from '@/lib/fonts'
+import { arabicFont, monoFont } from '@/lib/fonts'
 import { ThemeProvider } from '@/lib/theme'
 import { THEME_COLORS, THEME_KEY } from '@/lib/theme-constants'
 import './globals.css'
@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="ar"
       dir="rtl"
       data-theme="dark"
-      className={`${appFont.variable} ${displayFont.variable}`}
+      className={`${monoFont.variable} ${arabicFont.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-dvh bg-bg text-fg antialiased">

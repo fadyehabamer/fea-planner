@@ -201,6 +201,21 @@ const ar = {
     ],
   },
 
+
+  term: {
+    boot: ['init fea-planner', 'mount habits.grid --month=current', 'ready'],
+    marquee: ['١٥ عادة', 'شهر كامل', 'عربي / إنجليزي', 'فاتح / داكن', 'بدون إعلانات', 'بدون تتبّع', 'مجاني للأبد'],
+    cmd: {
+      stats: 'stat --summary',
+      tools: 'ls ./trackers',
+      compare: 'diff your-stack fea-planner',
+      built: 'cat capabilities.md',
+      pricing: 'cat pricing.txt',
+      faq: 'faq --list',
+      cta: 'run start',
+    },
+  },
+
   footer: { tagline: 'متتبّع العادات والنوم والمهام والأهداف.', rights: 'كل الحقوق محفوظة.' },
 
   why: {
@@ -487,6 +502,21 @@ const en = {
         a: 'Yes, from the settings page. Write them in Arabic and English, set a monthly target for each, and switch off any you do not need. They then carry across every month.',
       },
     ],
+  },
+
+
+  term: {
+    boot: ['init fea-planner', 'mount habits.grid --month=current', 'ready'],
+    marquee: ['15 habits', 'a full month', 'Arabic / English', 'light / dark', 'no ads', 'no tracking', 'free forever'],
+    cmd: {
+      stats: 'stat --summary',
+      tools: 'ls ./trackers',
+      compare: 'diff your-stack fea-planner',
+      built: 'cat capabilities.md',
+      pricing: 'cat pricing.txt',
+      faq: 'faq --list',
+      cta: 'run start',
+    },
   },
 
   footer: { tagline: 'Habit, sleep, task and goal tracker.', rights: 'All rights reserved.' },

@@ -18,7 +18,7 @@ function BrokenRow({ gapAt }: { gapAt: number }) {
         return (
           <span
             key={i}
-            className="h-5 w-5 rounded-[5px]"
+            className="h-5 w-5 "
             style={
               missing
                 ? { border: '1.5px dashed var(--line)', background: 'transparent' }
@@ -41,7 +41,7 @@ function Inner({ kind, onRetry }: { kind: Kind; onRetry?: () => void }) {
       <div className="hero-glow" />
 
       <div className="absolute end-4 top-4 flex items-center gap-1.5">
-        <div className="flex overflow-hidden rounded-lg border border-[var(--line-soft)] text-[11px] font-bold">
+        <div className="flex overflow-hidden border border-[var(--line-soft)] text-[11px] font-bold">
           {(['ar', 'en'] as const).map((l) => (
             <button
               key={l}
@@ -63,7 +63,7 @@ function Inner({ kind, onRetry }: { kind: Kind; onRetry?: () => void }) {
       <div className="relative w-full max-w-lg text-center">
         <Link href="/" className="inline-flex items-center gap-2.5">
           <span
-            className="grid h-9 w-9 place-items-center rounded-xl text-base font-extrabold"
+            className="grid h-9 w-9 place-items-center text-base font-extrabold"
             style={{ background: 'var(--brand-solid)', color: 'var(--brand-ink)' }}
           >
             F
@@ -91,7 +91,7 @@ function Inner({ kind, onRetry }: { kind: Kind; onRetry?: () => void }) {
           {kind === '500' && onRetry ? (
             <button
               onClick={onRetry}
-              className="cursor-pointer rounded-xl px-6 py-3.5 text-sm font-bold transition-opacity hover:opacity-90"
+              className="cursor-pointer px-6 py-3.5 text-sm font-bold transition-opacity hover:opacity-90"
               style={{ background: 'var(--brand-solid)', color: 'var(--brand-ink)' }}
             >
               {c.e500.retry}
@@ -99,7 +99,7 @@ function Inner({ kind, onRetry }: { kind: Kind; onRetry?: () => void }) {
           ) : (
             <Link
               href="/habits"
-              className="rounded-xl px-6 py-3.5 text-sm font-bold transition-opacity hover:opacity-90"
+              className="px-6 py-3.5 text-sm font-bold transition-opacity hover:opacity-90"
               style={{ background: 'var(--brand-solid)', color: 'var(--brand-ink)' }}
             >
               {c.e404.app}
@@ -108,7 +108,7 @@ function Inner({ kind, onRetry }: { kind: Kind; onRetry?: () => void }) {
 
           <Link
             href="/"
-            className="rounded-xl border border-[var(--line)] px-6 py-3.5 text-sm font-bold transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
+            className="border border-[var(--line)] px-6 py-3.5 text-sm font-bold transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
           >
             {copy.home}
           </Link>

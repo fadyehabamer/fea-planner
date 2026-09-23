@@ -39,7 +39,7 @@ export default function PolicyPage() {
                   >
                     <span
                       aria-hidden="true"
-                      className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full"
+                      className="mt-[9px] h-1.5 w-1.5 shrink-0 "
                       style={{ background: 'var(--fg-faint)' }}
                     />
                     {line}
@@ -51,7 +51,7 @@ export default function PolicyPage() {
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
                   dir="ltr"
-                  className="mt-4 inline-block rounded-xl border border-[var(--line)] px-5 py-3 text-sm font-bold transition-colors hover:border-[var(--brand)]"
+                  className="mt-4 inline-block border border-[var(--line)] px-5 py-3 text-sm font-bold transition-colors hover:border-[var(--brand)]"
                   style={{ color: 'var(--brand)' }}
                 >
                   {CONTACT_EMAIL}

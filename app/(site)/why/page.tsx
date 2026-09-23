@@ -47,14 +47,14 @@ export default function WhyPage() {
         <div className="flex flex-wrap gap-3">
           <Link
             href="/login"
-            className="rounded-xl px-6 py-3.5 text-sm font-bold transition-opacity hover:opacity-90"
+            className="px-6 py-3.5 text-sm font-bold transition-opacity hover:opacity-90"
             style={{ background: 'var(--brand-solid)', color: 'var(--brand-ink)' }}
           >
             {c.cta.button}
           </Link>
           <Link
             href="/policy"
-            className="rounded-xl border border-[var(--line)] px-6 py-3.5 text-sm font-bold transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
+            className="border border-[var(--line)] px-6 py-3.5 text-sm font-bold transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
           >
             {c.nav.privacy}
           </Link>

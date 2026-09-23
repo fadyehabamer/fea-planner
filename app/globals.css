@@ -1,23 +1,26 @@
 @import "tailwindcss";
 
-/* ---------- dark (default) ---------- */
+/* ============================================================
+   Terminal / Instrument
+   OLED black, phosphor text, hairline rules, monospace figures.
+   ============================================================ */
+
 :root {
   color-scheme: dark;
 
-  --bg: #09090b;
-  --bg-2: #101012;
-  --card: #17171a;
-  --card-2: #232327;
-  --line: #2a2a30;
-  --line-soft: #1f1f24;
-  --row-alt: #0e0e11;
-  --field: #0c0c0f;
-  --fg: #fafafa;
-  --fg-dim: #a1a1aa;
-  /* Lightened from #7b7b85: this token now carries eyebrow labels, which are
-     real text and must clear 4.5:1 on --card, not just on the page. */
+  --bg: #000000;
+  --bg-2: #060607;
+  --card: #0b0b0d;
+  --card-2: #131316;
+  --line: #22222a;
+  --line-soft: #151519;
+  --row-alt: #050506;
+  --field: #060607;
+  --fg: #ededed;
+  --fg-dim: #9a9aa4;
+  /* Carries small labels and readouts, so it has to clear 4.5:1 on --card. */
   --fg-faint: #8a8a94;
-  --shadow: rgba(0, 0, 0, 0.6);
+  --shadow: rgba(0, 0, 0, 0.8);
 
   --w1: #8b5cf6;
   --w2: #3b82f6;
@@ -26,36 +29,29 @@
   --w5: #ec4899;
   --amber: #f59e0b;
 
-  /* Monochrome. The "brand" is simply inverted contrast: a near-white fill
-     with near-black text. Hierarchy comes from weight, size and space —
-     not from hue. Separate from --w1..--w5, which encode the week bands. */
-  --brand: #fafafa;
-  --brand-solid: #fafafa;
-  --brand-ink: #09090b;
-  --brand-glow: rgba(250, 250, 250, 0.045);
-
-  /* Reserved for success states only; the page itself stays greyscale. */
+  /* Monochrome by design: the "brand" is inverted contrast, nothing more. */
+  --brand: #ededed;
+  --brand-solid: #ededed;
+  --brand-ink: #000000;
+  --brand-glow: rgba(237, 237, 237, 0.05);
   --accent: #10b981;
 }
 
-/* ---------- light ----------
-   Accents are a shade deeper than the dark theme's: the same hues stay vivid as
-   fills, but these also have to carry small text on white. */
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --bg: #fafafa;
-  --bg-2: #ffffff;
+  --bg: #ffffff;
+  --bg-2: #fafafa;
   --card: #ffffff;
   --card-2: #f4f4f5;
-  --line: #e4e4e7;
-  --line-soft: #efeff1;
+  --line: #e0e0e4;
+  --line-soft: #eeeef0;
   --row-alt: #fafafa;
   --field: #f4f4f5;
-  --fg: #09090b;
-  --fg-dim: #52525b;
-  --fg-faint: #71717a;
-  --shadow: rgba(9, 9, 11, 0.12);
+  --fg: #0a0a0a;
+  --fg-dim: #4a4a52;
+  --fg-faint: #6e6e78;
+  --shadow: rgba(10, 10, 10, 0.1);
 
   --w1: #7c3aed;
   --w2: #2563eb;
@@ -64,11 +60,10 @@
   --w5: #db2777;
   --amber: #d97706;
 
-  --brand: #09090b;
-  --brand-solid: #18181b;
+  --brand: #0a0a0a;
+  --brand-solid: #0a0a0a;
   --brand-ink: #ffffff;
-  --brand-glow: rgba(9, 9, 11, 0.04);
-
+  --brand-glow: rgba(10, 10, 10, 0.035);
   --accent: #047857;
 }
 
@@ -81,33 +76,46 @@
   --color-fg: var(--fg);
   --color-dim: var(--fg-dim);
   --color-faint: var(--fg-faint);
-  --font-sans: var(--font-app);
+  --font-sans: var(--font-mono);
 }
 
-* { -webkit-tap-highlight-color: transparent; }
+* {
+  -webkit-tap-highlight-color: transparent;
+}
 
-html, body {
+html,
+body {
   background: var(--bg);
   color: var(--fg);
 }
 
+/* Latin resolves to JetBrains Mono; Arabic has no glyphs there and falls
+   through to Noto Kufi Arabic, so each script gets the right face. */
 body {
-  font-family: var(--font-app), system-ui, -apple-system, "Segoe UI", sans-serif;
-  /* Keep content clear of the iOS home indicator when installed to the home screen. */
+  font-family: var(--font-mono), var(--font-ar), ui-monospace, monospace;
   padding-bottom: env(safe-area-inset-bottom);
   overscroll-behavior-y: none;
+  font-feature-settings: 'tnum' 1;
 }
 
-/* Ease the switch between themes without animating layout. */
-body, .theme-fade {
-  transition: background-color 180ms ease, color 180ms ease;
+.display {
+  font-family: var(--font-mono), var(--font-ar), ui-monospace, monospace;
+  letter-spacing: -0.035em;
+}
+[dir='rtl'] .display {
+  letter-spacing: 0;
+  line-height: 1.32;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  body, .theme-fade, .cell-btn { transition: none; }
+body,
+.theme-fade {
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
 }
 
-/* The monthly grid is intentionally wider than a phone — scroll it, do not squeeze it. */
+/* ---------- app surfaces ---------- */
+
 .scroll-x {
   overflow-x: auto;
   overflow-y: visible;
@@ -115,14 +123,18 @@ body, .theme-fade {
   scrollbar-width: thin;
   scrollbar-color: var(--line) transparent;
 }
-.scroll-x::-webkit-scrollbar { height: 8px; }
+.scroll-x::-webkit-scrollbar {
+  height: 8px;
+}
 .scroll-x::-webkit-scrollbar-thumb {
   background: var(--line);
   border-radius: 999px;
 }
-.scroll-x::-webkit-scrollbar-track { background: transparent; }
+.scroll-x::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-/* The habit-name column stays pinned while the 31 day columns slide under it.
+/* The habit-name column stays pinned while the day columns slide under it.
    No background here on purpose: this rule is unlayered and would outrank
    Tailwind's layered utilities, so each cell sets its own surface inline. */
 .sticky-col {
@@ -132,76 +144,48 @@ body, .theme-fade {
 }
 
 .cell-btn {
-  transition: transform 90ms ease, background-color 120ms ease, border-color 120ms ease;
+  transition:
+    transform 90ms ease,
+    background-color 120ms ease,
+    border-color 120ms ease;
 }
-.cell-btn:active { transform: scale(0.88); }
+.cell-btn:active {
+  transform: scale(0.88);
+}
 
-input, textarea, select { font: inherit; }
-
-input::placeholder, textarea::placeholder { color: var(--fg-faint); }
+input,
+textarea,
+select {
+  font: inherit;
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--fg-faint);
+}
 
 /* iOS zooms the page when a focused input is under 16px. */
 @media (max-width: 640px) {
-  input, textarea, select { font-size: 16px; }
-}
-
-@media print {
-  .no-print { display: none !important; }
-}
-
-/* ---------- marketing pages ---------- */
-
-/* Warm radial wash behind the hero. Amber, low alpha, and explicitly not the
-   blue/violet gradient every SaaS landing page reaches for. */
-.hero-glow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(58rem 30rem at 50% -8rem, var(--brand-glow), transparent 72%);
-}
-
-.display {
-  font-family: var(--font-display), var(--font-app), system-ui, sans-serif;
-  letter-spacing: -0.02em;
-}
-
-/* Arabic needs the looser tracking and taller line box that Latin does not. */
-[dir="rtl"] .display {
-  letter-spacing: 0;
-  line-height: 1.35;
-}
-
-.rule {
-  height: 1px;
-  background: linear-gradient(to left, transparent, var(--line), transparent);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .reveal {
-    animation: reveal 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-  @keyframes reveal {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: none; }
+  input,
+  textarea,
+  select {
+    font-size: 16px;
   }
 }
 
 /* ============================================================
-   Motion system
-   Everything below animates transform/opacity only, so nothing
-   triggers layout, and every effect is gated behind
-   prefers-reduced-motion. Reduced-motion users get the finished
-   state immediately rather than a degraded animation.
+   Motion
+   Transform/opacity only, so nothing triggers layout. Every
+   effect is gated on prefers-reduced-motion; reduced-motion
+   users get the finished state, not a degraded animation.
    ============================================================ */
 
-/* --- scroll-triggered reveal (driven by IntersectionObserver) --- */
 @media (prefers-reduced-motion: no-preference) {
   .reveal-item {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
     transition:
-      opacity 640ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 640ms cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 560ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
     transition-delay: var(--reveal-delay, 0ms);
     will-change: transform, opacity;
   }
@@ -212,7 +196,7 @@ input::placeholder, textarea::placeholder { color: var(--fg-faint); }
   }
 }
 
-/* --- reading-progress bar, driven by the scroll position itself --- */
+/* --- reading progress, driven by scroll position itself --- */
 .scroll-progress {
   transform: scaleX(0);
   transform-origin: 0 50%;
@@ -234,37 +218,83 @@ input::placeholder, textarea::placeholder { color: var(--fg-faint); }
   }
 }
 
-/* --- hero grid cells popping in --- */
-@media (prefers-reduced-motion: no-preference) {
-  .cell-pop {
-    animation: cellPop 380ms cubic-bezier(0.34, 1.4, 0.64, 1) both;
-    animation-delay: var(--pop-delay, 0ms);
-  }
+/* --- blinking block cursor --- */
+.cursor::after {
+  content: '';
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-inline-start: 0.14em;
+  background: currentColor;
+  vertical-align: text-bottom;
+  animation: blink 1.05s steps(1) infinite;
 }
-@keyframes cellPop {
-  from {
-    opacity: 0;
-    transform: scale(0.35);
-  }
-  to {
+@keyframes blink {
+  0%,
+  50% {
     opacity: 1;
-    transform: none;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cursor::after {
+    animation: none;
+    opacity: 1;
   }
 }
 
-/* --- card lift on hover --- */
-.lift {
-  transition:
-    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 240ms ease;
+/* --- scanline sweeping across the hero readout --- */
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+.scanline::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 26%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in oklab, var(--fg) 7%, transparent),
+    transparent
+  );
 }
 @media (prefers-reduced-motion: no-preference) {
-  .lift:hover {
-    transform: translateY(-4px);
+  .scanline::after {
+    animation: sweep 4.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+}
+@keyframes sweep {
+  0% {
+    transform: translateY(-110%);
+  }
+  100% {
+    transform: translateY(460%);
   }
 }
 
-/* --- structural grid texture: depth without colour --- */
+/* --- CRT line overlay: texture without colour --- */
+.crt::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--fg) 3.5%, transparent) 0 1px,
+    transparent 1px 3px
+  );
+  opacity: 0.5;
+}
+
+/* --- structural hairline grid --- */
 .grid-texture {
   position: absolute;
   inset: 0;
@@ -272,12 +302,44 @@ input::placeholder, textarea::placeholder { color: var(--fg-faint); }
   background-image:
     linear-gradient(to right, var(--line-soft) 1px, transparent 1px),
     linear-gradient(to bottom, var(--line-soft) 1px, transparent 1px);
-  background-size: 72px 72px;
-  -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 35%, transparent 80%);
-  mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 35%, transparent 80%);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 0%, #000 30%, transparent 82%);
+  mask-image: radial-gradient(ellipse 78% 62% at 50% 0%, #000 30%, transparent 82%);
 }
 
-/* --- hero visual easing away as the page scrolls past it --- */
+/* --- hover inverts. 90ms rather than 0ms: reads as instant, but still
+       registers as feedback instead of a hard snap. --- */
+.invert-hover {
+  transition:
+    background-color 90ms linear,
+    color 90ms linear,
+    border-color 90ms linear;
+}
+.invert-hover:hover {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+/* --- grid cells landing on the sheet --- */
+@media (prefers-reduced-motion: no-preference) {
+  .cell-pop {
+    animation: cellPop 320ms cubic-bezier(0.34, 1.4, 0.64, 1) both;
+    animation-delay: var(--pop-delay, 0ms);
+  }
+}
+@keyframes cellPop {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- hero readout easing away as the page scrolls past --- */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .hero-parallax {
@@ -289,13 +351,46 @@ input::placeholder, textarea::placeholder { color: var(--fg-faint); }
 }
 @keyframes heroPass {
   to {
-    opacity: 0.25;
-    transform: translateY(-26px) scale(0.965);
+    opacity: 0.2;
+    transform: translateY(-24px);
   }
 }
 
-/* --- sticky section visuals need clearance under the fixed header --- */
 .sticky-visual {
   position: sticky;
   top: 6rem;
+}
+
+/* --- marquee ticker --- */
+.marquee {
+  display: flex;
+  width: max-content;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .marquee {
+    animation: marquee 34s linear infinite;
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+[dir='rtl'] .marquee {
+  animation-direction: reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .theme-fade,
+  .cell-btn,
+  .invert-hover {
+    transition: none;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
 }

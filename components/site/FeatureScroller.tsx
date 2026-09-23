@@ -31,16 +31,19 @@ function Copy({ feature, index }: { feature: Feature; index: number }) {
   return (
     <>
       <div className="flex items-center gap-3">
-        <span className="display text-[11px] font-extrabold tabular-nums text-[var(--fg-faint)]">
-          {String(index + 1).padStart(2, '0')}
+        <span
+          dir="ltr"
+          className="display text-[11px] font-bold tabular-nums text-[var(--fg-faint)]"
+        >
+          [{String(index + 1).padStart(2, '0')}]
         </span>
         <span className="h-px w-8 bg-[var(--line)]" />
-        <span className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-[var(--fg-faint)]">
+        <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--fg-faint)]">
           {feature.eyebrow}
         </span>
       </div>
 
-      <h2 className="display mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
+      <h2 className="display mt-4 text-3xl font-bold leading-tight sm:text-4xl">
         {feature.title}
       </h2>
       <p className="mt-4 text-[15px] leading-[1.75] text-[var(--fg-dim)]">{feature.body}</p>
@@ -166,9 +169,9 @@ export default function FeatureScroller({
               <span
                 key={f.title}
                 aria-hidden="true"
-                className="h-1 rounded-full transition-all duration-300"
+                className="h-[3px] transition-all duration-300"
                 style={{
-                  width: i === active ? 28 : 10,
+                  width: i === active ? 32 : 10,
                   background: i === active ? 'var(--fg)' : 'var(--line)',
                 }}
               />

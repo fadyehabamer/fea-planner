@@ -5,6 +5,7 @@ import Counter from '@/components/site/Counter'
 import FeatureScroller from '@/components/site/FeatureScroller'
 import GridPreview from '@/components/site/GridPreview'
 import Reveal from '@/components/site/Reveal'
+import { BootSequence, Marquee, Readout, TerminalHead } from '@/components/site/terminal'
 import { TasksPreview, YearPreview } from '@/components/site/mocks'
 import { useCopy } from '@/lib/copy'
 
@@ -21,9 +22,9 @@ function Icon({ d }: { d: string }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      strokeWidth="1.6"
+      strokeLinecap="square"
+      strokeLinejoin="miter"
       className="h-5 w-5"
       aria-hidden="true"
     >
@@ -32,41 +33,26 @@ function Icon({ d }: { d: string }) {
   )
 }
 
-function Tick() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="mt-[3px] h-3.5 w-3.5 shrink-0"
-      aria-hidden="true"
-    >
-      <path d="M20 6L9 17l-5-5" />
-    </svg>
-  )
-}
-
-function PrimaryCta({ children, href = '/login' }: { children: React.ReactNode; href?: string }) {
+function Cta({ children, href = '/login' }: { children: React.ReactNode; href?: string }) {
   return (
     <Link
       href={href}
-      className="inline-block rounded-lg px-6 py-3.5 text-sm font-bold transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]"
-      style={{ background: 'var(--brand-solid)', color: 'var(--brand-ink)' }}
+      className="invert-hover inline-block border px-6 py-3.5 text-sm font-bold"
+      style={{ background: 'var(--brand-solid)', color: 'var(--brand-ink)', borderColor: 'var(--fg)' }}
     >
       {children}
     </Link>
   )
 }
 
-function SectionHead({ title, sub }: { title: string; sub?: string }) {
+function GhostCta({ children, href }: { children: React.ReactNode; href: string }) {
   return (
-    <Reveal>
-      <h2 className="display text-3xl font-extrabold sm:text-4xl">{title}</h2>
-      {sub ? <p className="mt-3 text-[15px] text-[var(--fg-dim)]">{sub}</p> : null}
-    </Reveal>
+    <Link
+      href={href}
+      className="invert-hover inline-block border border-[var(--line)] px-6 py-3.5 text-sm font-bold"
+    >
+      {children}
+    </Link>
   )
 }
 
@@ -77,48 +63,34 @@ export default function LandingPage() {
   return (
     <>
       {/* ---------------- hero ---------------- */}
-      <section className="relative overflow-hidden border-b border-[var(--line-soft)]">
+      <section className="crt relative overflow-hidden border-b border-[var(--line)]">
         <div className="grid-texture" />
-        <div className="hero-glow" />
 
-        <div className="relative mx-auto max-w-6xl px-4 pb-16 pt-16 text-center sm:px-6 sm:pb-20 sm:pt-24">
-          <div className="mx-auto max-w-3xl">
+        <div className="relative z-[2] mx-auto max-w-6xl px-4 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-20">
+          <BootSequence lines={c.term.boot} />
+
+          <div className="mx-auto mt-10 max-w-3xl text-center">
             <Reveal>
-              <span
-                className="inline-flex items-center rounded-full border px-3 py-1.5 text-[11px] font-bold"
-                style={{ borderColor: 'var(--line)', color: 'var(--fg-dim)' }}
-              >
-                {c.hero.badge}
-              </span>
-            </Reveal>
-
-            <Reveal delay={80}>
-              <h1 className="display mt-6 text-[2.5rem] font-extrabold leading-[1.08] text-[var(--fg-dim)] sm:text-6xl">
-                {c.hero.titleA}{' '}
-                <span className="text-[var(--fg)]">{c.hero.titleAccent}</span>
+              <h1 className="display cursor text-[2.3rem] font-bold leading-[1.1] sm:text-6xl">
+                {c.hero.titleA} <span className="text-[var(--fg-dim)]">{c.hero.titleAccent}</span>
               </h1>
             </Reveal>
 
-            <Reveal delay={160}>
-              <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-[var(--fg-dim)] sm:text-lg">
+            <Reveal delay={90}>
+              <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-[var(--fg-dim)] sm:text-base">
                 {c.hero.sub}
               </p>
             </Reveal>
 
-            <Reveal delay={240}>
+            <Reveal delay={180}>
               <div className="mt-9 flex flex-wrap justify-center gap-3">
-                <PrimaryCta>{c.hero.ctaPrimary}</PrimaryCta>
-                <Link
-                  href="/why"
-                  className="rounded-lg border border-[var(--line)] px-6 py-3.5 text-sm font-bold transition-colors duration-200 hover:border-[var(--fg)]"
-                >
-                  {c.hero.ctaSecondary}
-                </Link>
+                <Cta>{c.hero.ctaPrimary}</Cta>
+                <GhostCta href="/why">{c.hero.ctaSecondary}</GhostCta>
               </div>
             </Reveal>
           </div>
 
-          <Reveal delay={320} className="mx-auto mt-14 max-w-4xl">
+          <Reveal delay={260} className="mx-auto mt-14 max-w-4xl">
             <div className="hero-parallax">
               <GridPreview />
             </div>
@@ -126,105 +98,110 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <Marquee items={c.term.marquee} />
+
       {/* ---------------- stats ---------------- */}
-      <section className="border-b border-[var(--line-soft)] bg-[var(--bg-2)]">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 px-4 py-12 sm:px-6 md:grid-cols-4">
-          {c.stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 90} className="px-2 text-center">
-              <div className="display text-3xl font-extrabold tabular-nums sm:text-4xl">
-                <Counter value={s.value} />
-              </div>
-              <div className="mt-1.5 text-[11px] font-semibold text-[var(--fg-faint)]">
-                {s.label}
-              </div>
-            </Reveal>
-          ))}
+      <section className="border-b border-[var(--line-soft)]">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+          <div
+            dir="ltr"
+            className="mb-6 flex items-center gap-2 text-[11px] text-[var(--fg-faint)]"
+          >
+            <span className="select-none opacity-60">$</span>
+            {c.term.cmd.stats}
+          </div>
+
+          <div className="grid grid-cols-2 gap-px bg-[var(--line-soft)] md:grid-cols-4">
+            {c.stats.map((s, i) => (
+              <Reveal key={s.label} delay={i * 80} className="bg-[var(--bg)]">
+                <Readout label={`0${i + 1}`} className="border-0 h-full">
+                  <div className="display text-3xl font-bold tabular-nums sm:text-4xl">
+                    <Counter value={s.value} />
+                  </div>
+                  <div className="mt-1.5 text-[11px] text-[var(--fg-dim)]">{s.label}</div>
+                </Readout>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ---------------- features: pinned visual, scrolling copy ---------------- */}
+      {/* ---------------- trackers ---------------- */}
+      <section className="border-b border-[var(--line-soft)]">
+        <div className="mx-auto max-w-6xl px-4 pt-16 sm:px-6 sm:pt-24">
+          <Reveal>
+            <TerminalHead command={c.term.cmd.tools} title={c.tools.title} sub={c.tools.sub} />
+          </Reveal>
+        </div>
+      </section>
+
       <FeatureScroller features={c.features} visuals={visuals} />
 
-      {/* ---------------- comparison ---------------- */}
+      {/* ---------------- diff ---------------- */}
       <section className="border-b border-[var(--line-soft)]">
-        <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24">
-          <div className="max-w-2xl">
-            <SectionHead title={c.compare.title} sub={c.compare.sub} />
-          </div>
+        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
+          <Reveal>
+            <TerminalHead
+              command={c.term.cmd.compare}
+              title={c.compare.title}
+              sub={c.compare.sub}
+            />
+          </Reveal>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
-            <Reveal>
-              <div className="lift h-full rounded-2xl border border-[var(--line-soft)] p-6 hover:border-[var(--line)]">
-                <h3 className="text-xs font-extrabold uppercase tracking-wider text-[var(--fg-faint)]">
-                  {c.compare.beforeLabel}
-                </h3>
-                <ul className="mt-5 space-y-3.5">
-                  {c.compare.before.map((b) => (
-                    <li
-                      key={b}
-                      className="flex items-start gap-2.5 text-sm leading-relaxed text-[var(--fg-faint)]"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="mt-[3px] h-3.5 w-3.5 shrink-0"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        aria-hidden="true"
-                      >
-                        <path d="M18 6L6 18M6 6l12 12" />
-                      </svg>
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-
-            <Reveal delay={110}>
+          {/* Rendered as an actual diff: removals dimmed, additions at full contrast. */}
+          <Reveal delay={90}>
+            <div className="mt-10 border border-[var(--line)]">
               <div
-                className="lift h-full rounded-2xl border p-6"
-                style={{
-                  borderColor: 'var(--fg)',
-                  background: 'color-mix(in oklab, var(--fg) 4%, transparent)',
-                }}
+                dir="ltr"
+                className="flex items-center justify-between border-b border-[var(--line)] bg-[var(--card)] px-4 py-2 text-[10px] uppercase tracking-[0.18em] text-[var(--fg-faint)]"
               >
-                <h3 className="display text-xs font-extrabold uppercase tracking-wider">
-                  {c.compare.afterLabel}
-                </h3>
-                <ul className="mt-5 space-y-3.5">
-                  {c.compare.after.map((a) => (
-                    <li key={a} className="flex items-start gap-2.5 text-sm leading-relaxed">
-                      <Tick />
-                      {a}
-                    </li>
-                  ))}
-                </ul>
+                <span>--- {c.compare.beforeLabel}</span>
+                <span>+++ {c.compare.afterLabel}</span>
               </div>
-            </Reveal>
-          </div>
+
+              <div className="divide-y divide-[var(--line-soft)]">
+                {c.compare.before.map((b) => (
+                  <div key={b} className="flex gap-3 px-4 py-3 text-sm text-[var(--fg-faint)]">
+                    <span aria-hidden="true" className="select-none opacity-70">
+                      −
+                    </span>
+                    <span className="line-through decoration-[var(--line)]">{b}</span>
+                  </div>
+                ))}
+                {c.compare.after.map((a) => (
+                  <div
+                    key={a}
+                    className="flex gap-3 bg-[var(--card)] px-4 py-3 text-sm font-medium"
+                  >
+                    <span aria-hidden="true" className="select-none">
+                      +
+                    </span>
+                    <span>{a}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ---------------- built this way ---------------- */}
+      {/* ---------------- capabilities ---------------- */}
       <section className="border-b border-[var(--line-soft)] bg-[var(--bg-2)]">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-          <SectionHead title={c.built.title} />
+          <Reveal>
+            <TerminalHead command={c.term.cmd.built} title={c.built.title} />
+          </Reveal>
 
-          <div className="mt-10 grid gap-x-10 gap-y-9 sm:grid-cols-2">
+          <div className="mt-10 grid gap-px bg-[var(--line-soft)] sm:grid-cols-2">
             {c.built.items.map((item, i) => (
-              <Reveal key={item.title} delay={i * 80}>
-                <div className="flex gap-4">
-                  <span
-                    className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border transition-colors duration-200"
-                    style={{ borderColor: 'var(--line)' }}
-                  >
+              <Reveal key={item.title} delay={i * 70} className="bg-[var(--bg-2)]">
+                <div className="flex h-full gap-4 p-6">
+                  <span className="mt-0.5 shrink-0 text-[var(--fg-faint)]">
                     <Icon d={BUILT_ICONS[i]} />
                   </span>
                   <div>
-                    <h3 className="display text-base font-extrabold">{item.title}</h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-[var(--fg-dim)]">
+                    <h3 className="display text-base font-bold">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--fg-dim)]">
                       {item.desc}
                     </p>
                   </div>
@@ -237,39 +214,53 @@ export default function LandingPage() {
 
       {/* ---------------- pricing ---------------- */}
       <section className="border-b border-[var(--line-soft)]">
-        <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 sm:py-24">
-          <SectionHead title={c.pricing.title} sub={c.pricing.sub} />
+        <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
+          <Reveal>
+            <TerminalHead
+              command={c.term.cmd.pricing}
+              title={c.pricing.title}
+              sub={c.pricing.sub}
+            />
+          </Reveal>
 
-          <Reveal delay={110}>
-            <div className="lift mt-10 rounded-2xl border border-[var(--line)] bg-[var(--card)] p-8 text-start hover:border-[var(--fg-faint)] sm:p-10">
-              <div className="flex flex-wrap items-end justify-between gap-4">
+          <Reveal delay={90}>
+            <div className="mt-10 border border-[var(--line)] bg-[var(--card)]">
+              <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[var(--line)] p-6 sm:p-8">
                 <div>
-                  <div className="display text-xs font-extrabold uppercase tracking-wider text-[var(--fg-faint)]">
+                  <div
+                    dir="ltr"
+                    className="text-[10px] uppercase tracking-[0.18em] text-[var(--fg-faint)]"
+                  >
                     {c.pricing.plan}
                   </div>
                   <div className="mt-2 flex items-baseline gap-1.5">
-                    <span className="display text-5xl font-extrabold tabular-nums">
+                    <span className="display text-5xl font-bold tabular-nums">
                       {c.pricing.price}
                     </span>
                     <span className="text-lg font-bold text-[var(--fg-dim)]">
                       {c.pricing.currency}
                     </span>
-                    <span className="text-sm text-[var(--fg-faint)]">/ {c.pricing.period}</span>
+                    <span className="text-xs text-[var(--fg-faint)]">/ {c.pricing.period}</span>
                   </div>
                 </div>
-                <PrimaryCta>{c.pricing.cta}</PrimaryCta>
+                <Cta>{c.pricing.cta}</Cta>
               </div>
 
-              <ul className="mt-8 grid gap-3 border-t border-[var(--line-soft)] pt-8 sm:grid-cols-2">
+              <ul className="grid gap-x-8 gap-y-3 p-6 sm:grid-cols-2 sm:p-8">
                 {c.pricing.includes.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm text-[var(--fg-dim)]">
-                    <Tick />
+                  <li
+                    key={f}
+                    className="flex items-start gap-2.5 text-sm text-[var(--fg-dim)]"
+                  >
+                    <span aria-hidden="true" className="select-none opacity-70">
+                      +
+                    </span>
                     {f}
                   </li>
                 ))}
               </ul>
 
-              <p className="mt-8 border-t border-[var(--line-soft)] pt-6 text-xs leading-relaxed text-[var(--fg-faint)]">
+              <p className="border-t border-[var(--line-soft)] p-6 text-xs leading-relaxed text-[var(--fg-faint)] sm:px-8">
                 {c.pricing.note}
               </p>
             </div>
@@ -280,28 +271,35 @@ export default function LandingPage() {
       {/* ---------------- faq ---------------- */}
       <section className="border-b border-[var(--line-soft)] bg-[var(--bg-2)]">
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
-          <SectionHead title={c.faq.title} />
+          <Reveal>
+            <TerminalHead command={c.term.cmd.faq} title={c.faq.title} />
+          </Reveal>
 
           <div className="mt-10 divide-y divide-[var(--line-soft)] border-y border-[var(--line-soft)]">
             {c.faq.items.map((item, i) => (
-              <Reveal key={item.q} delay={i * 60}>
+              <Reveal key={item.q} delay={i * 55}>
                 {/* <details> gives keyboard support and expand/collapse semantics for free. */}
                 <details className="group py-5">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-start text-[15px] font-bold transition-colors duration-200 hover:text-[var(--fg-dim)] [&::-webkit-details-marker]:hidden">
-                    {item.q}
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      className="h-4 w-4 shrink-0 text-[var(--fg-faint)] transition-transform duration-300 group-open:rotate-[135deg]"
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-start text-sm font-bold [&::-webkit-details-marker]:hidden">
+                    <span className="flex gap-3">
+                      <span
+                        aria-hidden="true"
+                        className="select-none text-[var(--fg-faint)] transition-opacity group-open:opacity-40"
+                      >
+                        ?
+                      </span>
+                      {item.q}
+                    </span>
+                    <span
                       aria-hidden="true"
+                      className="shrink-0 select-none text-[var(--fg-faint)] transition-transform duration-200 group-open:rotate-45"
                     >
-                      <path d="M12 5v14M5 12h14" />
-                    </svg>
+                      +
+                    </span>
                   </summary>
-                  <p className="mt-3 pe-8 text-sm leading-[1.75] text-[var(--fg-dim)]">{item.a}</p>
+                  <p className="mt-3 ps-6 pe-8 text-sm leading-[1.75] text-[var(--fg-dim)]">
+                    {item.a}
+                  </p>
                 </details>
               </Reveal>
             ))}
@@ -309,20 +307,27 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ---------------- closing CTA ---------------- */}
-      <section className="relative overflow-hidden">
+      {/* ---------------- closing ---------------- */}
+      <section className="crt relative overflow-hidden">
         <div className="grid-texture" />
-        <div className="hero-glow" />
-        <div className="relative mx-auto max-w-3xl px-4 py-20 text-center sm:px-6 sm:py-28">
+        <div className="relative z-[2] mx-auto max-w-3xl px-4 py-20 text-center sm:px-6 sm:py-28">
+          <div
+            dir="ltr"
+            className="mb-8 flex items-center justify-center gap-2 text-[11px] text-[var(--fg-faint)]"
+          >
+            <span className="select-none opacity-60">$</span>
+            {c.term.cmd.cta}
+          </div>
+
           <Reveal>
-            <h2 className="display text-3xl font-extrabold sm:text-5xl">{c.cta.title}</h2>
+            <h2 className="display cursor text-3xl font-bold sm:text-5xl">{c.cta.title}</h2>
           </Reveal>
-          <Reveal delay={90}>
-            <p className="mx-auto mt-4 max-w-md text-[15px] text-[var(--fg-dim)]">{c.cta.sub}</p>
+          <Reveal delay={80}>
+            <p className="mx-auto mt-5 max-w-md text-sm text-[var(--fg-dim)]">{c.cta.sub}</p>
           </Reveal>
-          <Reveal delay={170}>
+          <Reveal delay={150}>
             <div className="mt-9">
-              <PrimaryCta>{c.cta.button}</PrimaryCta>
+              <Cta>{c.cta.button}</Cta>
             </div>
             <p className="mt-4 text-xs text-[var(--fg-faint)]">{c.cta.note}</p>
           </Reveal>

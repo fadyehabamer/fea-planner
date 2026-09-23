@@ -9,25 +9,25 @@ export function TasksPreview() {
   return (
     <div
       aria-hidden="true"
-      className="rounded-2xl border border-[var(--line-soft)] bg-[var(--card)] p-3 shadow-2xl shadow-[var(--shadow)] sm:p-4"
+      className="border border-[var(--line-soft)] bg-[var(--card)] p-3 shadow-2xl shadow-[var(--shadow)] sm:p-4"
     >
       <div className="grid grid-cols-5 gap-2">
         {DAY_PCT.map((pct, d) => (
-          <div key={d} className="overflow-hidden rounded-lg border border-[var(--line-soft)]">
+          <div key={d} className="overflow-hidden border border-[var(--line-soft)]">
             <div
               className="h-1.5 w-full"
               style={{ background: 'var(--brand-solid)', opacity: 1 - d * 0.17 }}
             />
             <div className="p-1.5">
-              <div className="h-1.5 w-2/3 rounded-full bg-[var(--line)]" />
+              <div className="h-1.5 w-2/3 bg-[var(--line)]" />
               <div
                 className="mt-2 text-[13px] font-extrabold leading-none text-[var(--fg)]"
               >
                 {pct}%
               </div>
-              <div className="mt-1.5 h-1 w-full rounded-full bg-[var(--line-soft)]">
+              <div className="mt-1.5 h-1 w-full bg-[var(--line-soft)]">
                 <div
-                  className="h-1 rounded-full"
+                  className="h-1 "
                   style={{ width: `${pct}%`, background: 'var(--brand-solid)', opacity: 1 - d * 0.17 }}
                 />
               </div>
@@ -38,7 +38,7 @@ export function TasksPreview() {
                   return (
                     <div key={i} className="flex items-center gap-1">
                       <span
-                        className="h-[7px] w-[7px] shrink-0 rounded-[2px]"
+                        className="h-[7px] w-[7px] shrink-0 "
                         style={{
                           background: done ? 'var(--brand-solid)' : 'var(--field)',
                           opacity: done ? 1 - d * 0.17 : 1,
@@ -46,7 +46,7 @@ export function TasksPreview() {
                         }}
                       />
                       <span
-                        className="h-[5px] rounded-full bg-[var(--line)]"
+                        className="h-[5px] bg-[var(--line)]"
                         style={{ width: `${52 + ((i * 17) % 40)}%` }}
                       />
                     </div>
@@ -67,11 +67,11 @@ export function YearPreview() {
   return (
     <div
       aria-hidden="true"
-      className="rounded-2xl border border-[var(--line-soft)] bg-[var(--card)] p-4 shadow-2xl shadow-[var(--shadow)] sm:p-5"
+      className="border border-[var(--line-soft)] bg-[var(--card)] p-4 shadow-2xl shadow-[var(--shadow)] sm:p-5"
     >
       <div className="mb-4 flex items-end justify-between">
-        <div className="h-2 w-24 rounded-full bg-[var(--line)]" />
-        <div className="h-2 w-10 rounded-full bg-[var(--line)]" />
+        <div className="h-2 w-24 bg-[var(--line)]" />
+        <div className="h-2 w-10 bg-[var(--line)]" />
       </div>
 
       <div className="flex h-36 items-end gap-1.5">
@@ -80,7 +80,7 @@ export function YearPreview() {
             <span className="text-[8px] font-bold tabular-nums text-[var(--fg-faint)]">{pct}</span>
             <div className="flex w-full flex-1 items-end">
               <div
-                className="w-full rounded-t-[3px]"
+                className="w-full "
                 style={{
                   height: `${pct}%`,
                   background: 'var(--brand-solid)',
@@ -88,7 +88,7 @@ export function YearPreview() {
                 }}
               />
             </div>
-            <span className="h-[5px] w-full rounded-full bg-[var(--line)]" />
+            <span className="h-[5px] w-full bg-[var(--line)]" />
           </div>
         ))}
       </div>
@@ -96,10 +96,10 @@ export function YearPreview() {
       <div className="mt-4 space-y-2 border-t border-[var(--line-soft)] pt-4">
         {[75, 60, 40].map((pct, i) => (
           <div key={i} className="flex items-center gap-2.5">
-            <span className="h-[6px] w-16 shrink-0 rounded-full bg-[var(--line)]" />
-            <div className="h-1.5 flex-1 rounded-full bg-[var(--line-soft)]">
+            <span className="h-[6px] w-16 shrink-0 bg-[var(--line)]" />
+            <div className="h-1.5 flex-1 bg-[var(--line-soft)]">
               <div
-                className="h-1.5 rounded-full"
+                className="h-1.5 "
                 style={{ width: `${pct}%`, background: 'var(--brand-solid)', opacity: 1 - i * 0.22 }}
               />
             </div>
