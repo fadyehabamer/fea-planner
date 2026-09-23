@@ -37,12 +37,12 @@
   --brand-glow: rgba(237, 237, 237, 0.05);
   --accent: #10b981;
 
-  /* The one colour on the marketing site: a highlighter lime. It is only ever
-     a fill under near-black ink (15:1), never text on the page background. */
-  --pop: #c6f432;
-  --pop-ink: #0a0a0a;
-  --pop-edge: #c6f432;
-  --pop-soft: rgba(198, 244, 50, 0.12);
+  /* The brand colour: sunflower. Only ever a fill under near-black ink
+     (13:1), never text on the page background. */
+  --pop: #ffd23f;
+  --pop-ink: #1a1714;
+  --pop-edge: #ffd23f;
+  --pop-soft: rgba(255, 210, 63, 0.12);
 }
 
 :root[data-theme="light"] {
@@ -74,12 +74,12 @@
   --brand-glow: rgba(10, 10, 10, 0.035);
   --accent: #047857;
 
-  /* Lime on white is too faint to see as a filled box on its own, so in the
-     light theme every lime fill also gets a darker olive edge. */
-  --pop: #c6f432;
-  --pop-ink: #0a0a0a;
-  --pop-edge: #6f8f00;
-  --pop-soft: rgba(111, 143, 0, 0.1);
+  /* Yellow on white is too faint to see as a filled box on its own, so in
+     the light theme every yellow fill also gets a darker edge. */
+  --pop: #ffd23f;
+  --pop-ink: #1a1714;
+  --pop-edge: #a67c00;
+  --pop-soft: rgba(166, 124, 0, 0.1);
 }
 
 @theme inline {
@@ -419,67 +419,6 @@ textarea::placeholder {
   }
 }
 
-/* --- highlighter swipe behind a headline word --- */
-.marker {
-  position: relative;
-  z-index: 0;
-  white-space: nowrap;
-  color: var(--pop-ink);
-}
-.marker::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: 0.06em -0.12em 0.02em;
-  border-radius: 0.14em;
-  background: var(--pop);
-  transform-origin: 0 50%;
-}
-[dir='rtl'] .marker::before {
-  transform-origin: 100% 50%;
-}
-/* The swipe plays when its words arrive: after the hero headline rises, or
-   when a section's reveal fires. Until then the ink stays page-coloured so
-   the words are readable before the lime lands under them. */
-@media (prefers-reduced-motion: no-preference) {
-  .reveal-item:not([data-in='true']) .marker::before {
-    transform: scaleX(0);
-  }
-  .word .marker,
-  .word .marker::before,
-  .reveal-item[data-in='true'] .marker,
-  .reveal-item[data-in='true'] .marker::before {
-    animation-duration: 700ms;
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-    animation-delay: var(--marker-delay, 250ms);
-    animation-fill-mode: both;
-  }
-  .word .marker,
-  .reveal-item[data-in='true'] .marker {
-    animation-name: markerInk;
-  }
-  .word .marker::before,
-  .reveal-item[data-in='true'] .marker::before {
-    animation-name: markerSwipe;
-  }
-  .word .marker {
-    --marker-delay: 700ms;
-  }
-  .word .marker::before {
-    --marker-delay: 700ms;
-  }
-}
-@keyframes markerSwipe {
-  from {
-    transform: scaleX(0);
-  }
-}
-@keyframes markerInk {
-  from {
-    color: var(--fg);
-  }
-}
-
 /* --- a box being ticked in the demo --- */
 @media (prefers-reduced-motion: no-preference) {
   .tick-in {
@@ -526,6 +465,247 @@ textarea::placeholder {
 }
 @media (prefers-reduced-motion: reduce) {
   .sticky-cta {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Notebook — the marketing site
+   Dotted paper, sticker colours, washi tape and pen scribbles.
+   Scoped to .site so the app keeps its own quieter surfaces.
+   ============================================================ */
+
+.site {
+  /* Night notebook: warm ink-brown paper, cream pen. */
+  --bg: #17140f;
+  --bg-2: #1d1913;
+  --card: #221d16;
+  --card-2: #2b251c;
+  --line: #3b3329;
+  --line-soft: #2b251c;
+  --field: #1d1913;
+  --row-alt: #1b1812;
+  --fg: #f6efe2;
+  --fg-dim: #cbc1b0;
+  --fg-faint: #a69b88;
+  --shadow: rgba(0, 0, 0, 0.55);
+  --brand: #f6efe2;
+  --brand-solid: #f6efe2;
+  --brand-ink: #17140f;
+
+  /* Outlines and the hard offset shadows behind stickers and buttons. */
+  --edge: #efe6d6;
+  --hard: #54483a;
+  --dots: rgba(246, 239, 226, 0.085);
+
+  /* Sticker colours. Always fills under --on, never text on paper. */
+  --sun: #ffd23f;
+  --tang: #ff9a52;
+  --mint: #5fe0a8;
+  --pink: #ff9ecf;
+  --leaf: #c4ee6e;
+  --on: #1a1714;
+
+  font-family: var(--font-fun), var(--font-fun-ar), system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-feature-settings: normal;
+}
+:root[data-theme='light'] .site {
+  /* Day notebook: cream paper, ink pen. */
+  --bg: #fbf6ec;
+  --bg-2: #f5eddf;
+  --card: #fffdf8;
+  --card-2: #f3eadb;
+  --line: #e0d4bf;
+  --line-soft: #ebe2d2;
+  --field: #f6efe3;
+  --row-alt: #faf5eb;
+  --fg: #1a1714;
+  --fg-dim: #4d4640;
+  --fg-faint: #675e55;
+  --shadow: rgba(26, 23, 20, 0.12);
+  --brand: #1a1714;
+  --brand-solid: #1a1714;
+  --brand-ink: #fbf6ec;
+
+  --edge: #1a1714;
+  --hard: #1a1714;
+  --dots: rgba(26, 23, 20, 0.13);
+}
+
+.site .display {
+  font-family: var(--font-fun), var(--font-fun-ar), system-ui, sans-serif;
+  letter-spacing: -0.035em;
+}
+[dir='rtl'] .site .display {
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.hand {
+  font-family: var(--font-hand), var(--font-hand-ar), cursive;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.paper {
+  background-image: radial-gradient(var(--dots) 1.3px, transparent 1.4px);
+  background-size: 22px 22px;
+}
+
+/* --- chunky: outlined, with a hard shadow that the press squashes flat --- */
+.chunky {
+  border: 2px solid var(--edge);
+  box-shadow: 4px 4px 0 var(--hard);
+  transition:
+    transform 140ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 140ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.chunky-sm {
+  border: 2px solid var(--edge);
+  box-shadow: 3px 3px 0 var(--hard);
+}
+@media (hover: hover) {
+  a.chunky:hover,
+  button.chunky:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--hard);
+  }
+}
+a.chunky:active,
+button.chunky:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--hard);
+  transition-duration: 60ms;
+}
+
+/* --- cards pinned slightly askew; they straighten up when you reach for them --- */
+.askew {
+  transform: rotate(var(--r, 0deg));
+  transition: transform 380ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@media (hover: hover) {
+  .askew:hover {
+    transform: rotate(0deg) translateY(-6px);
+  }
+}
+
+/* --- washi tape: translucent, with torn ends --- */
+.tape {
+  position: absolute;
+  z-index: 2;
+  width: 96px;
+  height: 28px;
+  background: color-mix(in oklab, var(--tape, var(--sun)) 78%, transparent);
+  clip-path: polygon(
+    0 8%, 4% 0, 8% 10%, 12% 0, 88% 0, 92% 10%, 96% 0, 100% 8%,
+    100% 92%, 96% 100%, 92% 90%, 88% 100%, 12% 100%, 8% 90%, 4% 100%, 0 92%
+  );
+  pointer-events: none;
+}
+
+/* --- pen scribbles draw themselves (paths use pathLength="1") --- */
+.draw path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .draw path {
+    stroke-dashoffset: 1;
+    animation: draw 900ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation-delay: var(--draw-delay, 400ms);
+  }
+  .reveal-item:not([data-in='true']) .draw path {
+    animation-play-state: paused;
+  }
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* --- stickers bob gently, each on its own beat --- */
+.sticker {
+  transform: rotate(var(--r, 0deg));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bob {
+    animation: bob var(--bob, 5s) ease-in-out infinite;
+    animation-delay: var(--bob-delay, 0s);
+  }
+  .pop-in {
+    animation: popIn 620ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    animation-delay: var(--pop-delay, 0ms);
+  }
+}
+@keyframes bob {
+  50% {
+    transform: translateY(-9px) rotate(calc(var(--r, 0deg) * -1));
+  }
+}
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-14deg);
+  }
+}
+
+/* --- the demo's rewards: "+1" floats off a box, confetti on a full day --- */
+@media (prefers-reduced-motion: no-preference) {
+  .plus-one {
+    animation: plusOne 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .confetti i {
+    animation: confetti 1100ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plus-one,
+  .confetti {
+    display: none;
+  }
+}
+@keyframes plusOne {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(0.8);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -34px) scale(1.15);
+  }
+}
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+.confetti i {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 10px;
+  height: 14px;
+  border-radius: 3px;
+  opacity: 0;
+}
+@keyframes confetti {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--rot));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chunky,
+  .askew {
     transition: none;
   }
 }

@@ -42,3 +42,4 @@ export const arabicFont = Reem_Kufi({
   variable: '--font-ar',
   display: 'swap',
 })
+

@@ -14,7 +14,7 @@ function Wordmark({ size = 'md' }: { size?: 'md' | 'sm' }) {
   return (
     <span className="flex items-center gap-2.5">
       <BrandMark className={size === 'md' ? 'h-9 w-9' : 'h-7 w-7'} />
-      <span className="display text-lg font-black tracking-tight">
+      <span className="display text-xl font-extrabold tracking-tight">
         {locale === 'ar' ? BRAND.ar : BRAND.en}
       </span>
     </span>
@@ -94,8 +94,8 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
             </Link>
             <Link
               href="/login"
-              className="ms-1 inline-flex min-h-11 items-center rounded-full px-5 text-sm font-black transition-transform duration-200 hover:scale-[1.04]"
-              style={{ background: 'var(--pop)', color: 'var(--pop-ink)' }}
+              className="chunky-sm ms-1 inline-flex min-h-11 items-center rounded-full px-5 text-sm font-extrabold transition-transform duration-200 hover:-translate-y-0.5"
+              style={{ background: 'var(--sun)', color: 'var(--on)' }}
             >
               {c.nav.signIn}
             </Link>

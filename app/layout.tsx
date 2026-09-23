@@ -50,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Scroll reveals are driven by IntersectionObserver. Without JS nothing
             would ever flip them visible, so opt out of hiding them entirely. */}
         <noscript>
-          <style>{'.reveal-item{opacity:1!important;transform:none!important}.marker::before{transform:none!important}'}</style>
+          <style>{'.reveal-item{opacity:1!important;transform:none!important}.draw path{stroke-dashoffset:0!important;animation:none!important}'}</style>
         </noscript>
         <ThemeProvider>{children}</ThemeProvider>
         <RegisterSW />

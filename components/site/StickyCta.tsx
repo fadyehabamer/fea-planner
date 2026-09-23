@@ -45,13 +45,13 @@ export default function StickyCta({ label, watch }: { label: string; watch: stri
     <div
       ref={ref}
       data-show="false"
-      className="sticky-cta fixed inset-x-0 bottom-0 z-40 border-t border-[var(--line)] bg-[var(--bg)]/95 px-4 pt-3 backdrop-blur sm:hidden"
+      className="sticky-cta fixed inset-x-0 bottom-0 z-40 border-t-2 border-[var(--line)] bg-[var(--bg)]/95 px-4 pe-5 pt-3 backdrop-blur sm:hidden"
       style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
     >
       <Link
         href="/login"
-        className="flex min-h-12 w-full items-center justify-center rounded-full text-base font-black"
-        style={{ background: 'var(--pop)', color: 'var(--pop-ink)' }}
+        className="chunky flex min-h-12 w-full items-center justify-center rounded-full text-base font-extrabold"
+        style={{ background: 'var(--sun)', color: 'var(--on)' }}
       >
         {label}
       </Link>

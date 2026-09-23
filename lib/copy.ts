@@ -23,11 +23,15 @@ const ar = {
     ctaSecondary: 'بيشتغل إزاي؟',
     micro: 'إيميلك بس. من غير باسورد. أقل من ١٠ ثواني.',
     proof: ['بدون إعلانات', 'بيشتغل من غير نت', 'موبايل ولابتوب', 'بياناتك ليك بس'],
+    note: 'جرّبه من غير تسجيل',
+    stickers: { free: 'مجاني ١٠٠٪', arabic: 'بالعربي!', guilt: 'من غير ذنب' },
   },
 
   demo: {
-    label: 'جرّبه هنا',
+    label: 'جرّب كده…',
     title: 'دوس على مربعات النهاردة',
+    hint: 'يلا، دوسة واحدة بس ↑',
+    perfect: 'يوم كامل! كده بالظبط.',
     habits: ['قراية ٢٠ دقيقة', 'تمرين', 'لترين مية', 'نوم قبل ١٢', 'من غير موبايل في السرير'],
     days: ['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س'],
     daysFull: ['الأحد', 'الاتنين', 'التلات', 'الأربع', 'الخميس', 'الجمعة', 'السبت'],
@@ -112,6 +116,7 @@ const ar = {
     sub: 'مفيش خطط ولا ترقيات ولا حاجة مقفولة ورا دفع.',
     price: '٠',
     period: 'للأبد',
+    tag: 'ولا مليم',
     includes: [
       'الأربع أدوات كاملة من غير قيود',
       'مزامنة بين الموبايل واللابتوب',
@@ -265,11 +270,15 @@ const en = {
     ctaSecondary: 'How it works',
     micro: 'Just your email. No password. Under 10 seconds.',
     proof: ['No ads', 'Works offline', 'Phone + laptop', 'Your data stays yours'],
+    note: 'try it, no sign-up',
+    stickers: { free: '100% free', arabic: 'في عربي!', guilt: 'zero guilt' },
   },
 
   demo: {
-    label: 'Try it right here',
+    label: 'go on, try it…',
     title: "Tap today's boxes",
+    hint: 'just one tap ↑',
+    perfect: 'Perfect day! Exactly like that.',
     habits: ['Read 20 min', 'Workout', 'Drink 2L water', 'Asleep by 12', 'No phone in bed'],
     days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
     daysFull: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -358,6 +367,7 @@ const en = {
     sub: 'No plans, no upgrades, nothing held behind a paywall.',
     price: '$0',
     period: 'forever',
+    tag: 'not a cent',
     includes: [
       'All four trackers, no limits',
       'Synced between phone and laptop',
