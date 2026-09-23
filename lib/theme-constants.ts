@@ -8,6 +8,6 @@ export const DEFAULT_THEME: Theme = 'dark'
 
 /** Kept in sync with the tokens in globals.css so browser chrome matches the page. */
 export const THEME_COLORS: Record<Theme, string> = {
-  dark: '#0a1020',
-  light: '#f4f6fb',
+  dark: '#09090b',
+  light: '#fafafa',
 }

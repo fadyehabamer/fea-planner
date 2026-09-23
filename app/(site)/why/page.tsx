@@ -31,7 +31,7 @@ export default function WhyPage() {
               <div className="flex items-baseline gap-3">
                 <span
                   className="display text-xs font-extrabold tabular-nums"
-                  style={{ color: 'var(--accent)' }}
+                  style={{ color: 'var(--brand)' }}
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>

@@ -4,18 +4,18 @@
 :root {
   color-scheme: dark;
 
-  --bg: #0a1020;
-  --bg-2: #0f1729;
-  --card: #151d33;
-  --card-2: #1b2440;
-  --line: #243050;
-  --line-soft: #1c2745;
-  --row-alt: #0e1526;
-  --field: #0f1729;
-  --fg: #e9edf9;
-  --fg-dim: #97a3c0;
-  --fg-faint: #64718f;
-  --shadow: rgba(0, 0, 0, 0.45);
+  --bg: #09090b;
+  --bg-2: #101013;
+  --card: #18181b;
+  --card-2: #232327;
+  --line: #2a2a30;
+  --line-soft: #1f1f24;
+  --row-alt: #0e0e11;
+  --field: #0c0c0f;
+  --fg: #fafafa;
+  --fg-dim: #a1a1aa;
+  --fg-faint: #7b7b85;
+  --shadow: rgba(0, 0, 0, 0.6);
 
   --w1: #8b5cf6;
   --w2: #3b82f6;
@@ -24,13 +24,14 @@
   --w5: #ec4899;
   --amber: #f59e0b;
 
-  /* Brand: warm amber for chrome and CTAs, emerald as the supporting accent.
+  /* Brand: graphite carries the page, one rose accent does the work.
      Separate from --w1..--w5, which are data colours for the week bands. */
-  --brand: #fbbf24;
-  --brand-solid: #f59e0b;
-  --brand-ink: #1a1205;
-  --accent: #34d399;
-  --brand-glow: rgba(245, 158, 11, 0.14);
+  --brand: #fb7185;
+  --brand-solid: #e11d48;
+  --brand-ink: #ffffff;
+  /* Reserved for success states only; the page itself stays graphite + rose. */
+  --accent: #10b981;
+  --brand-glow: rgba(225, 29, 72, 0.13);
 }
 
 /* ---------- light ----------
@@ -39,18 +40,18 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --bg: #f4f6fb;
+  --bg: #fafafa;
   --bg-2: #ffffff;
   --card: #ffffff;
-  --card-2: #eef2fa;
-  --line: #d5deee;
-  --line-soft: #e6ebf5;
-  --row-alt: #f7f9fd;
-  --field: #eef3fa;
-  --fg: #0f172e;
-  --fg-dim: #4b5a7a;
-  --fg-faint: #8190ad;
-  --shadow: rgba(15, 23, 46, 0.18);
+  --card-2: #f4f4f5;
+  --line: #e4e4e7;
+  --line-soft: #efeff1;
+  --row-alt: #fafafa;
+  --field: #f4f4f5;
+  --fg: #09090b;
+  --fg-dim: #52525b;
+  --fg-faint: #71717a;
+  --shadow: rgba(9, 9, 11, 0.12);
 
   --w1: #7c3aed;
   --w2: #2563eb;
@@ -59,13 +60,13 @@
   --w5: #db2777;
   --amber: #d97706;
 
-  /* Amber-700 rather than -600: it has to clear 4.5:1 against white for
-     button labels and body-sized accent text, and -600 does not. */
-  --brand: #b45309;
-  --brand-solid: #b45309;
+  /* Text uses rose-700 and fills rose-600: rose-600 as text lands on exactly
+     4.50:1 against the page, with no margin for error. */
+  --brand: #be123c;
+  --brand-solid: #e11d48;
   --brand-ink: #ffffff;
   --accent: #047857;
-  --brand-glow: rgba(180, 83, 9, 0.10);
+  --brand-glow: rgba(225, 29, 72, 0.08);
 }
 
 @theme inline {
@@ -155,7 +156,7 @@ input::placeholder, textarea::placeholder { color: var(--fg-faint); }
   pointer-events: none;
   background:
     radial-gradient(60rem 32rem at 50% -8rem, var(--brand-glow), transparent 70%),
-    radial-gradient(40rem 24rem at 85% 10%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 70%);
+    radial-gradient(38rem 22rem at 82% 8%, color-mix(in oklab, var(--brand) 7%, transparent), transparent 70%);
 }
 
 .display {

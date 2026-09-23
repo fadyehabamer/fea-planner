@@ -4,10 +4,10 @@ const ROWS = 9
 const COLS = 28
 
 /**
- * Marketing visuals use the two brand tones only. The app's own week bands
- * span five hues including blue and violet, which do not belong on this page.
+ * A single rose stepped down in opacity, rather than the app's five week hues.
+ * A monochrome ramp is what keeps the page reading as one system.
  */
-const BANDS = ['var(--brand-solid)', 'var(--accent)', 'var(--brand-solid)', 'var(--accent)']
+const BAND_ALPHA = [1, 0.74, 0.5, 0.32]
 
 /**
  * Deterministic pseudo-noise. Math.random() would differ between the server
@@ -28,11 +28,11 @@ export default function GridPreview() {
       className="rounded-2xl border border-[var(--line-soft)] bg-[var(--card)] p-3 shadow-2xl shadow-[var(--shadow)] sm:p-4"
     >
       <div className="mb-3 flex items-center gap-1.5">
-        {BANDS.map((c, i) => (
+        {BAND_ALPHA.map((a, i) => (
           <div
             key={i}
             className="h-1.5 flex-1 rounded-full"
-            style={{ background: c, opacity: 0.85 }}
+            style={{ background: 'var(--brand-solid)', opacity: a }}
           />
         ))}
       </div>
@@ -46,14 +46,14 @@ export default function GridPreview() {
             />
             {Array.from({ length: COLS }, (_, col) => {
               const on = filled(r, col)
-              const color = BANDS[Math.min(Math.floor(col / 7), BANDS.length - 1)]
+              const alpha = BAND_ALPHA[Math.min(Math.floor(col / 7), BAND_ALPHA.length - 1)]
               return (
                 <div
                   key={col}
                   className="aspect-square flex-1 rounded-[2px]"
                   style={{
-                    background: on ? color : 'var(--field)',
-                    opacity: on ? 0.92 : 1,
+                    background: on ? 'var(--brand-solid)' : 'var(--field)',
+                    opacity: on ? alpha : 1,
                     border: on ? 'none' : '1px solid var(--line-soft)',
                   }}
                 />
@@ -69,7 +69,7 @@ export default function GridPreview() {
           <div
             key={col}
             className="aspect-square flex-1 rounded-[2px]"
-            style={{ background: 'var(--amber)', opacity: 0.2 + ((col * 7) % 10) / 14 }}
+            style={{ background: 'var(--fg-faint)', opacity: 0.18 + ((col * 7) % 10) / 22 }}
           />
         ))}
       </div>

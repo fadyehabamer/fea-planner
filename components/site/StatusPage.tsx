@@ -7,7 +7,7 @@ import { I18nProvider, useI18n } from '@/lib/i18n'
 
 type Kind = '404' | '500'
 
-const BRAND_TONES = ['var(--brand-solid)', 'var(--accent)']
+const TONE_ALPHA = [1, 0.72, 0.46]
 
 /** A row of ticked boxes with a deliberate gap — the missing page, in the app's own visual language. */
 function BrokenRow({ gapAt }: { gapAt: number }) {
@@ -22,7 +22,7 @@ function BrokenRow({ gapAt }: { gapAt: number }) {
             style={
               missing
                 ? { border: '1.5px dashed var(--line)', background: 'transparent' }
-                : { background: BRAND_TONES[i % BRAND_TONES.length], opacity: 0.85 }
+                : { background: 'var(--brand-solid)', opacity: TONE_ALPHA[i % TONE_ALPHA.length] }
             }
           />
         )

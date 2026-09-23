@@ -76,6 +76,75 @@ const ar = {
     note: 'بندخّلك برابط على إيميلك.',
   },
 
+
+  stats: [
+    { value: '465', label: 'نقطة بيانات في الشهر' },
+    { value: '4', label: 'أدوات في ملف واحد' },
+    { value: '2', label: 'لغة بالكامل' },
+    { value: '0', label: 'جنيه، للأبد' },
+  ],
+
+  features: [
+    {
+      eyebrow: 'العادات والنوم',
+      title: 'الشهر كله، مش النهاردة بس',
+      body: 'شبكة واحدة فيها ١٥ عادة في كل يوم من أيام الشهر. كل أسبوع بلون، وكل عادة ليها نسبتها، وساعات نومك تحت في نفس الشاشة — عشان تشوف العلاقة بين نومك وباقي يومك من غير ما تدوّر.',
+      points: ['نسبة لكل عادة مقابل هدفها الشهري', 'صف للنوم كل ليلة ومتوسط الشهر', 'أكتر ٥ عادات التزامًا وتقدمك أسبوع بأسبوع'],
+    },
+    {
+      eyebrow: 'المهام',
+      title: 'أسبوع تقدر تخطّطه فعلًا',
+      body: 'سبع أعمدة قدامك، لحد ١٤ مهمة لليوم. كل يوم بلونه ونسبته، وفي الآخر سطر واحد بيقولك عملت كام من كام في الأسبوع كله.',
+      points: ['نسبة إنجاز لكل يوم', 'إجمالي الأسبوع في سطر', 'إضافة ومسح سريع من غير نوافذ'],
+    },
+    {
+      eyebrow: 'الأهداف والسنة',
+      title: 'أهداف مقسّمة، وسنة تقدر تقارنها',
+      body: 'ستة أهداف للسنة، كل واحد مقسوم لعشر خطوات — لإن «أتعلم لغة» مش مهمة، دي عشر مهام. والملخص السنوي بيحط الاتناشر شهر جنب بعض عشان تشوف فين اتحسنت وفين وقعت.',
+      points: ['٦ أهداف × ١٠ خطوات لكل سنة', 'الاتناشر شهر: المكتمل والمستهدف والنسبة', 'متوسط النوم لكل شهر ورسم بياني للسنة'],
+    },
+  ],
+
+  compare: {
+    title: 'بدل أربع تطبيقات',
+    sub: 'كل حاجة من دول بتعيش في مكان لوحدها. هنا بيعيشوا في ملف واحد.',
+    beforeLabel: 'اللي بتستخدمه دلوقتي',
+    afterLabel: 'fea-planner',
+    before: ['تطبيق عادات بيوريك النهاردة بس', 'تطبيق مهام منفصل تمامًا', 'دفتر أهداف بتفتحه مرة في السنة', 'شيت إكسل بتصلّحه كل شهر'],
+    after: ['شهر كامل في شاشة واحدة', 'مهام الأسبوع جنب عاداتك', 'أهداف مقسّمة لخطوات بتتابعها', 'كل الحسابات بتتعمل لوحدها'],
+  },
+
+  pricing: {
+    title: 'التسعير',
+    sub: 'مفيش خطط ولا ترقيات ولا حاجة مقفولة.',
+    plan: 'مجاني',
+    price: '0',
+    currency: 'ج.م',
+    period: 'للأبد',
+    includes: [
+      'الأربع أدوات كاملة من غير أي قيود',
+      'مزامنة بين الموبايل واللابتوب',
+      'عربي وإنجليزي، فاتح وداكن',
+      'تثبيت على شاشة الموبايل',
+      'بدون إعلانات وبدون تتبّع',
+      'بياناتك معزولة على مستوى قاعدة البيانات',
+    ],
+    cta: 'ابدأ دلوقتي',
+    note: 'ده مشروع شخصي شغال على الباقات المجانية. مفيش نية نحطّ حاجة ورا دفع، ولو ده اتغير يومًا هتعرف قبلها.',
+  },
+
+  faq: {
+    title: 'أسئلة بتتسأل',
+    items: [
+      { q: 'مجاني بجد؟', a: 'أيوه. مفيش نسخة مدفوعة ولا تجربة مجانية ولا كارت. المشروع شغال على الباقة المجانية في Vercel و Supabase، وده كفاية للاستخدام الشخصي.' },
+      { q: 'محتاج أنزّل حاجة؟', a: 'لأ. بيشتغل في المتصفح على أي جهاز. ولو حبيت، تقدر تضيفه على شاشة موبايلك من قايمة المشاركة وهيفتح من غير شريط المتصفح زي أي تطبيق.' },
+      { q: 'أقدر أستخدمه بالعربي؟', a: 'التطبيق كله بالعربي والإنجليزي، والاتجاه بيتظبط لوحده. تقدر تقلب بين اللغتين في أي وقت من زرار في الأعلى، والاختيار بيتحفظ على جهازك.' },
+      { q: 'مين يقدر يشوف بياناتي؟', a: 'إنت بس. كل صف في قاعدة البيانات مربوط بحسابك بسياسة أمان جوه قاعدة البيانات نفسها، مش في الكود — يعني حتى لو فيه غلطة برمجية، حساب تاني مش هيقدر يقرا بياناتك.' },
+      { q: 'لو فاتني يوم؟', a: 'مفيش حاجة بتتكسر. مفيش سلاسل ولا إشعارات ولا شارات. اليوم اللي فات بيفضل مربع فاضي، والنسبة رقم محايد بيقولك المعلومة من غير ما يحسّسك بذنب.' },
+      { q: 'أقدر أغيّر الـ١٥ عادة؟', a: 'أيوه، من صفحة الإعدادات. تكتبهم بالعربي والإنجليزي وتحدد هدف كل واحدة في الشهر، وتقدر تقفل أي عادة مش محتاجها. وبيفضلوا معاك في كل الشهور.' },
+    ],
+  },
+
   footer: { tagline: 'متتبّع العادات والنوم والمهام والأهداف.', rights: 'كل الحقوق محفوظة.' },
 
   why: {
@@ -172,6 +241,75 @@ const en = {
     sub: 'A free account with your email. No password, no card.',
     button: 'Start free',
     note: 'We sign you in with a link sent to your inbox.',
+  },
+
+
+  stats: [
+    { value: '465', label: 'data points a month' },
+    { value: '4', label: 'trackers in one file' },
+    { value: '2', label: 'languages, fully' },
+    { value: '0', label: 'cost, forever' },
+  ],
+
+  features: [
+    {
+      eyebrow: 'Habits & sleep',
+      title: 'The month, not just today',
+      body: 'One grid holds 15 habits across every day of the month. A colour per week, a rate per habit, and your sleep hours on the same screen — so the link between how you slept and how the rest of the day went is right there, not buried in another app.',
+      points: ['A rate per habit against its monthly target', 'A sleep row per night and a monthly average', 'Your five most consistent habits, and week-by-week progress'],
+    },
+    {
+      eyebrow: 'Tasks',
+      title: 'A week you can actually plan',
+      body: 'Seven columns in front of you, up to 14 tasks a day. Each day gets a colour and a completion rate, and one line at the bottom tells you how much of the week you actually finished.',
+      points: ['A completion rate per day', 'Week total in a single line', 'Add and clear quickly, no dialogs'],
+    },
+    {
+      eyebrow: 'Goals & the year',
+      title: 'Goals broken down, years you can compare',
+      body: 'Six goals a year, each split into ten steps — because "learn a language" is not a task, it is ten of them. The yearly summary then puts all twelve months side by side, so you can see where you improved and where you slipped.',
+      points: ['6 goals × 10 steps per year', 'Twelve months: completed, target and rate', 'Average sleep per month, and a chart for the year'],
+    },
+  ],
+
+  compare: {
+    title: 'Instead of four apps',
+    sub: 'Each of these normally lives somewhere else. Here they live in one file.',
+    beforeLabel: 'What you use now',
+    afterLabel: 'fea-planner',
+    before: ['A habit app that only shows today', 'A separate to-do app', 'A goals notebook you open once a year', 'A spreadsheet you repair every month'],
+    after: ['A whole month on one screen', 'This week\'s tasks next to your habits', 'Goals split into steps you actually track', 'Every calculation done for you'],
+  },
+
+  pricing: {
+    title: 'Pricing',
+    sub: 'No plans, no upgrades, nothing held back.',
+    plan: 'Free',
+    price: '0',
+    currency: '$',
+    period: 'forever',
+    includes: [
+      'All four trackers, no limits',
+      'Synced between phone and laptop',
+      'Arabic and English, light and dark',
+      'Installs to your home screen',
+      'No ads and no tracking',
+      'Your rows sealed off at the database level',
+    ],
+    cta: 'Start now',
+    note: 'This is a personal project running on free tiers. There is no plan to put anything behind a paywall, and if that ever changed you would hear about it first.',
+  },
+
+  faq: {
+    title: 'Questions people ask',
+    items: [
+      { q: 'Is it really free?', a: 'Yes. There is no paid tier, no trial and no card. It runs on the Vercel and Supabase free tiers, which comfortably covers personal use.' },
+      { q: 'Do I need to install anything?', a: 'No. It runs in the browser on any device. If you want, add it to your home screen from the share menu and it opens without browser chrome, like any other app.' },
+      { q: 'Can I use it in Arabic?', a: 'The whole app is in Arabic and English, and the layout direction follows. Switch between them any time from the header; your choice is remembered on that device.' },
+      { q: 'Who can see my data?', a: 'Only you. Every row is tied to your account by a security policy inside the database itself, not in application code — so even a bug in the app cannot show your rows to another account.' },
+      { q: 'What if I miss a day?', a: 'Nothing breaks. There are no streaks, no notifications and no badges. A missed day stays an empty box, and the percentage is a neutral number that tells you the fact without making you feel bad about it.' },
+      { q: 'Can I change the 15 habits?', a: 'Yes, from the settings page. Write them in Arabic and English, set a monthly target for each, and switch off any you do not need. They then carry across every month.' },
+    ],
   },
 
   footer: { tagline: 'Habit, sleep, task and goal tracker.', rights: 'All rights reserved.' },
