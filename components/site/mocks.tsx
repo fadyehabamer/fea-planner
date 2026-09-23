@@ -9,11 +9,11 @@ export function TasksPreview() {
   return (
     <div
       aria-hidden="true"
-      className="border border-[var(--line-soft)] bg-[var(--card)] p-3 shadow-2xl shadow-[var(--shadow)] sm:p-4"
+      className="rounded-[1.75rem] border border-[var(--line-soft)] bg-[var(--card)] p-3 shadow-2xl shadow-[var(--shadow)] sm:p-4"
     >
       <div className="grid grid-cols-5 gap-2">
         {DAY_PCT.map((pct, d) => (
-          <div key={d} className="overflow-hidden border border-[var(--line-soft)]">
+          <div key={d} className="overflow-hidden rounded-xl border border-[var(--line-soft)]">
             <div
               className="h-1.5 w-full"
               style={{ background: 'var(--brand-solid)', opacity: 1 - d * 0.17 }}
@@ -67,7 +67,7 @@ export function YearPreview() {
   return (
     <div
       aria-hidden="true"
-      className="border border-[var(--line-soft)] bg-[var(--card)] p-4 shadow-2xl shadow-[var(--shadow)] sm:p-5"
+      className="rounded-[1.75rem] border border-[var(--line-soft)] bg-[var(--card)] p-4 shadow-2xl shadow-[var(--shadow)] sm:p-5"
     >
       <div className="mb-4 flex items-end justify-between">
         <div className="h-2 w-24 bg-[var(--line)]" />

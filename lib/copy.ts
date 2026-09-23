@@ -202,18 +202,9 @@ const ar = {
   },
 
 
-  term: {
-    boot: ['init fea-planner', 'mount habits.grid --month=current', 'ready'],
-    marquee: ['١٥ عادة', 'شهر كامل', 'عربي / إنجليزي', 'فاتح / داكن', 'بدون إعلانات', 'بدون تتبّع', 'مجاني للأبد'],
-    cmd: {
-      stats: 'stat --summary',
-      tools: 'ls ./trackers',
-      compare: 'diff your-stack fea-planner',
-      built: 'cat capabilities.md',
-      pricing: 'cat pricing.txt',
-      faq: 'faq --list',
-      cta: 'run start',
-    },
+  kinetic: {
+    marquee: ['العادات', 'النوم', 'المهام', 'الأهداف', 'السنة'],
+    scroll: 'كمّل تمرير',
   },
 
   footer: { tagline: 'متتبّع العادات والنوم والمهام والأهداف.', rights: 'كل الحقوق محفوظة.' },
@@ -505,18 +496,9 @@ const en = {
   },
 
 
-  term: {
-    boot: ['init fea-planner', 'mount habits.grid --month=current', 'ready'],
-    marquee: ['15 habits', 'a full month', 'Arabic / English', 'light / dark', 'no ads', 'no tracking', 'free forever'],
-    cmd: {
-      stats: 'stat --summary',
-      tools: 'ls ./trackers',
-      compare: 'diff your-stack fea-planner',
-      built: 'cat capabilities.md',
-      pricing: 'cat pricing.txt',
-      faq: 'faq --list',
-      cta: 'run start',
-    },
+  kinetic: {
+    marquee: ['Habits', 'Sleep', 'Tasks', 'Goals', 'The year'],
+    scroll: 'Keep scrolling',
   },
 
   footer: { tagline: 'Habit, sleep, task and goal tracker.', rights: 'All rights reserved.' },

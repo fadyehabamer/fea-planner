@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Terminal / Instrument
-   OLED black, phosphor text, hairline rules, monospace figures.
+   Kinetic Oversized
+   Black and white, type at poster scale, motion that answers
+   the pointer and the scroll.
    ============================================================ */
 
 :root {
@@ -76,7 +77,7 @@
   --color-fg: var(--fg);
   --color-dim: var(--fg-dim);
   --color-faint: var(--fg-faint);
-  --font-sans: var(--font-mono);
+  --font-sans: var(--font-latin);
 }
 
 * {
@@ -89,17 +90,17 @@ body {
   color: var(--fg);
 }
 
-/* Latin resolves to JetBrains Mono; Arabic has no glyphs there and falls
-   through to Noto Kufi Arabic, so each script gets the right face. */
+/* Latin resolves to Archivo; Arabic has no glyphs there and falls through
+   to Reem Kufi, so each script gets the right face from one stack. */
 body {
-  font-family: var(--font-mono), var(--font-ar), ui-monospace, monospace;
+  font-family: var(--font-latin), var(--font-ar), system-ui, sans-serif;
   padding-bottom: env(safe-area-inset-bottom);
   overscroll-behavior-y: none;
   font-feature-settings: 'tnum' 1;
 }
 
 .display {
-  font-family: var(--font-mono), var(--font-ar), ui-monospace, monospace;
+  font-family: var(--font-latin), var(--font-ar), system-ui, sans-serif;
   letter-spacing: -0.035em;
 }
 [dir='rtl'] .display {
@@ -218,82 +219,6 @@ textarea::placeholder {
   }
 }
 
-/* --- blinking block cursor --- */
-.cursor::after {
-  content: '';
-  display: inline-block;
-  width: 0.55em;
-  height: 1.05em;
-  margin-inline-start: 0.14em;
-  background: currentColor;
-  vertical-align: text-bottom;
-  animation: blink 1.05s steps(1) infinite;
-}
-@keyframes blink {
-  0%,
-  50% {
-    opacity: 1;
-  }
-  50.01%,
-  100% {
-    opacity: 0;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cursor::after {
-    animation: none;
-    opacity: 1;
-  }
-}
-
-/* --- scanline sweeping across the hero readout --- */
-.scanline {
-  position: relative;
-  overflow: hidden;
-}
-.scanline::after {
-  content: '';
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
-  height: 26%;
-  pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    color-mix(in oklab, var(--fg) 7%, transparent),
-    transparent
-  );
-}
-@media (prefers-reduced-motion: no-preference) {
-  .scanline::after {
-    animation: sweep 4.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-  }
-}
-@keyframes sweep {
-  0% {
-    transform: translateY(-110%);
-  }
-  100% {
-    transform: translateY(460%);
-  }
-}
-
-/* --- CRT line overlay: texture without colour --- */
-.crt::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  background: repeating-linear-gradient(
-    to bottom,
-    color-mix(in oklab, var(--fg) 3.5%, transparent) 0 1px,
-    transparent 1px 3px
-  );
-  opacity: 0.5;
-}
-
 /* --- structural hairline grid --- */
 .grid-texture {
   position: absolute;
@@ -302,23 +227,136 @@ textarea::placeholder {
   background-image:
     linear-gradient(to right, var(--line-soft) 1px, transparent 1px),
     linear-gradient(to bottom, var(--line-soft) 1px, transparent 1px);
-  background-size: 44px 44px;
-  -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 0%, #000 30%, transparent 82%);
-  mask-image: radial-gradient(ellipse 78% 62% at 50% 0%, #000 30%, transparent 82%);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 0%, #000 30%, transparent 82%);
+  mask-image: radial-gradient(ellipse 80% 65% at 50% 0%, #000 30%, transparent 82%);
 }
 
-/* --- hover inverts. 90ms rather than 0ms: reads as instant, but still
-       registers as feedback instead of a hard snap. --- */
-.invert-hover {
-  transition:
-    background-color 90ms linear,
-    color 90ms linear,
-    border-color 90ms linear;
+/* --- poster-scale type --- */
+.mega {
+  font-size: clamp(2.75rem, 10.5vw, 9.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  font-weight: 900;
 }
-.invert-hover:hover {
-  background: var(--fg);
+/* Arabic needs a taller line box for the dots and no negative tracking,
+   which would break the joins between letters. */
+[dir='rtl'] .mega {
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+/* Variable fonts keep overlapping contours, so a plain text-stroke draws
+   seams through the inside of letters (worst across Arabic joins). Filling
+   with the page colour and painting the fill over the stroke hides them;
+   the stroke is doubled because only its outer half stays visible. */
+.outline-text {
   color: var(--bg);
-  border-color: var(--fg);
+  -webkit-text-stroke: 3px var(--fg);
+  paint-order: stroke fill;
+}
+
+/* --- headline words rise out of a mask, one after another --- */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* Room for accents and Arabic dots, which the mask would otherwise clip. */
+  padding-block: 0.08em 0.14em;
+  margin-block: -0.08em -0.14em;
+}
+.word {
+  display: inline-block;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .word {
+    animation: wordUp 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i, 0) * 70ms + 120ms);
+  }
+}
+@keyframes wordUp {
+  from {
+    transform: translateY(108%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* --- magnetic buttons (pointer-driven in JS; this is the spring back) --- */
+.magnetic {
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- 3D tilt toward the pointer, with a glare that follows it --- */
+.tilt {
+  position: relative;
+  transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tilt[data-active='true'] {
+  transition-duration: 120ms;
+}
+.tilt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    26rem circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in oklab, var(--fg) 9%, transparent),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+.tilt[data-active='true']::after {
+  opacity: 1;
+}
+
+/* --- card lift --- */
+.lift {
+  transition:
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 200ms ease;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lift:hover {
+    transform: translateY(-6px);
+  }
+}
+
+/* --- spinning badge --- */
+@media (prefers-reduced-motion: no-preference) {
+  .spin-slow {
+    animation: spin 22s linear infinite;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- marquee. The track is forced LTR in markup, so the same -50% loop is
+       seamless in both languages; each word keeps its own direction. --- */
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marquee var(--marquee-speed, 40s) linear infinite;
+  }
+  .marquee-track[data-reverse='true'] {
+    animation-direction: reverse;
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* --- grid cells landing on the sheet --- */
@@ -339,7 +377,7 @@ textarea::placeholder {
   }
 }
 
-/* --- hero readout easing away as the page scrolls past --- */
+/* --- hero visual easing away as the page scrolls past it --- */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .hero-parallax {
@@ -351,40 +389,30 @@ textarea::placeholder {
 }
 @keyframes heroPass {
   to {
-    opacity: 0.2;
-    transform: translateY(-24px);
+    opacity: 0.25;
+    transform: translateY(-30px) scale(0.97);
   }
 }
 
-.sticky-visual {
-  position: sticky;
-  top: 6rem;
-}
-
-/* --- marquee ticker --- */
-.marquee {
-  display: flex;
-  width: max-content;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .marquee {
-    animation: marquee 34s linear infinite;
+/* --- pinned horizontal scroll. Scroll-linked sideways motion is exactly
+       what reduced-motion users opt out of, so they get a plain swipeable
+       strip instead of the pinned track. --- */
+@media (prefers-reduced-motion: reduce) {
+  .hpin-pinned {
+    display: none !important;
   }
-}
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
+  .hpin-strip {
+    display: block !important;
   }
-}
-[dir='rtl'] .marquee {
-  animation-direction: reverse;
 }
 
 @media (prefers-reduced-motion: reduce) {
   body,
   .theme-fade,
   .cell-btn,
-  .invert-hover {
+  .magnetic,
+  .tilt,
+  .lift {
     transition: none;
   }
 }
@@ -393,4 +421,9 @@ textarea::placeholder {
   .no-print {
     display: none !important;
   }
+}
+
+/* The "keep scrolling" hint belongs to the pinned track only. */
+.hpin-strip .hpin-hint {
+  display: none !important;
 }

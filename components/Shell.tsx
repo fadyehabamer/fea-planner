@@ -84,12 +84,12 @@ export default function Shell({ children }: { children: React.ReactNode }) {
           </nav>
 
           <div className="ms-auto flex items-center gap-1.5 md:ms-0">
-            <div className="flex overflow-hidden rounded-lg border border-[var(--line-soft)] text-[11px] font-bold">
+            <div className="flex overflow-hidden rounded-full border border-[var(--line-soft)] text-xs font-bold">
               {(['ar', 'en'] as const).map((l) => (
                 <button
                   key={l}
                   onClick={() => setLocale(l)}
-                  className={`px-2.5 py-1.5 transition-colors ${
+                  className={`grid min-h-11 min-w-11 place-items-center transition-colors ${
                     locale === l
                       ? 'bg-[var(--card-2)] text-[var(--fg)]'
                       : 'text-[var(--fg-faint)] hover:text-[var(--fg)]'
@@ -104,7 +104,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
               onClick={signOut}
               title={t.signOut}
               aria-label={t.signOut}
-              className="grid h-8 w-8 place-items-center rounded-lg border border-[var(--line-soft)] text-[var(--fg-dim)] hover:text-[var(--w4)]"
+              className="grid h-11 w-11 place-items-center rounded-full border border-[var(--line-soft)] text-[var(--fg-dim)] hover:text-[var(--w4)]"
             >
               <svg
                 viewBox="0 0 24 24"

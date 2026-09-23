@@ -17,7 +17,7 @@ export default function ThemeToggle({ className = '' }: { className?: string }) 
       onClick={toggle}
       title={next}
       aria-label={`${t.theme}: ${next}`}
-      className={`grid h-8 w-8 place-items-center rounded-lg border border-[var(--line-soft)] text-[var(--fg-dim)] transition-colors hover:text-[var(--amber)] ${className}`}
+      className={`grid h-11 w-11 place-items-center rounded-full border border-[var(--line-soft)] text-[var(--fg-dim)] transition-colors hover:text-[var(--amber)] ${className}`}
     >
       <svg
         viewBox="0 0 24 24"

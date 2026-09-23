@@ -25,13 +25,13 @@ export default function GridPreview() {
   return (
     <div
       aria-hidden="true"
-      className="scanline crt border border-[var(--line)] bg-[var(--card)] p-3 sm:p-4"
+      className="rounded-[1.75rem] border border-[var(--line)] bg-[var(--card)] p-4 shadow-2xl shadow-[var(--shadow)] sm:p-6"
     >
       <div className="mb-3 flex items-center gap-1.5">
         {BAND_ALPHA.map((a, i) => (
           <div
             key={i}
-            className="h-1 flex-1"
+            className="h-1.5 flex-1 rounded-full"
             style={{ background: 'var(--brand-solid)', opacity: a }}
           />
         ))}
@@ -41,7 +41,7 @@ export default function GridPreview() {
         {Array.from({ length: ROWS }, (_, r) => (
           <div key={r} className="flex items-center gap-[3px]">
             <div
-              className="h-[9px] shrink-0 bg-[var(--line)]"
+              className="h-[9px] shrink-0 rounded-full bg-[var(--line)]"
               style={{ width: 34 + ((r * 13) % 22) }}
             />
             {Array.from({ length: COLS }, (_, col) => {
@@ -52,7 +52,7 @@ export default function GridPreview() {
                   key={col}
                   // Only ticked cells animate: the empty grid is already there
                   // and the marks land on it, which is the thing being shown.
-                  className={`aspect-square flex-1 ${on ? 'cell-pop' : ''}`}
+                  className={`aspect-square flex-1 rounded-[3px] ${on ? 'cell-pop' : ''}`}
                   style={
                     {
                       background: on ? 'var(--brand-solid)' : 'var(--field)',
@@ -69,11 +69,11 @@ export default function GridPreview() {
       </div>
 
       <div className="mt-3 flex items-center gap-[3px]">
-        <div className="h-[9px] w-12 shrink-0 bg-[var(--line)]" />
+        <div className="h-[9px] w-12 shrink-0 rounded-full bg-[var(--line)]" />
         {Array.from({ length: COLS }, (_, col) => (
           <div
             key={col}
-            className="aspect-square flex-1"
+            className="aspect-square flex-1 rounded-[3px]"
             style={{ background: 'var(--fg-faint)', opacity: 0.18 + ((col * 7) % 10) / 22 }}
           />
         ))}

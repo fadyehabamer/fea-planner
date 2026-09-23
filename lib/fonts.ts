@@ -1,4 +1,4 @@
-import { JetBrains_Mono, Noto_Kufi_Arabic } from 'next/font/google'
+import { Archivo, Reem_Kufi } from 'next/font/google'
 
 /**
  * ─── Switching Arabic to Thamanya ─────────────────────────────────────────
@@ -25,22 +25,20 @@ import { JetBrains_Mono, Noto_Kufi_Arabic } from 'next/font/google'
  */
 
 /**
- * Latin and every numeral. A monospace face is not only the direction here —
- * it is functionally right for a screen that is mostly a grid of figures,
- * because the digits are all one width and columns stop shifting.
+ * Latin. A variable grotesque that holds up at 900 and 10rem, which is what
+ * the oversized headlines need. Being variable, one file covers every weight
+ * instead of one file per weight.
  */
-export const monoFont = JetBrains_Mono({
+export const latinFont = Archivo({
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-mono',
+  variable: '--font-latin',
   display: 'swap',
 })
 
-/** Arabic. Geometric kufi, which sits with a monospace Latin far better than
- *  a rounded or naskh face would. */
-export const arabicFont = Noto_Kufi_Arabic({
+/** Arabic. Geometric kufi — the only Arabic family on Google Fonts with the
+ *  same squared-off, poster-weight character as Archivo at display size. */
+export const arabicFont = Reem_Kufi({
   subsets: ['arabic'],
-  weight: ['400', '500', '700'],
   variable: '--font-ar',
   display: 'swap',
 })

@@ -12,7 +12,7 @@ function Wordmark({ size = 'md' }: { size?: 'md' | 'sm' }) {
   return (
     <span className="flex items-center gap-2.5">
       <span
-        className={`grid ${box} place-items-center font-extrabold`}
+        className={`grid ${box} place-items-center rounded-full font-extrabold`}
         style={{ background: 'var(--brand-solid)', color: 'var(--brand-ink)' }}
       >
         F
@@ -36,7 +36,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
     <div className="min-h-dvh">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-3 focus:focus:px-4 focus:py-2 focus:text-sm focus:font-bold"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-3 focus:rounded-full focus:px-4 focus:py-2 focus:text-sm focus:font-bold"
         style={{ background: 'var(--brand-solid)', color: 'var(--brand-ink)' }}
       >
         {locale === 'ar' ? 'تخطَّ إلى المحتوى' : 'Skip to content'}
@@ -57,7 +57,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
                   key={l.href}
                   href={l.href}
                   aria-current={active ? 'page' : undefined}
-                  className={`px-3 py-2 text-sm font-semibold transition-colors ${
+                  className={`rounded-full px-4 py-2.5 text-sm font-semibold transition-colors ${
                     active
                       ? 'text-[var(--fg)]'
                       : 'text-[var(--fg-dim)] hover:bg-[var(--card)] hover:text-[var(--fg)]'
@@ -70,13 +70,13 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
           </nav>
 
           <div className="ms-auto flex items-center gap-1.5">
-            <div className="flex overflow-hidden border border-[var(--line-soft)] text-[11px] font-bold">
+            <div className="flex overflow-hidden rounded-full border border-[var(--line-soft)] text-xs font-bold">
               {(['ar', 'en'] as const).map((l) => (
                 <button
                   key={l}
                   onClick={() => setLocale(l)}
                   aria-pressed={locale === l}
-                  className={`cursor-pointer px-2.5 py-1.5 transition-colors ${
+                  className={`grid min-h-11 min-w-11 cursor-pointer place-items-center transition-colors ${
                     locale === l
                       ? 'bg-[var(--card-2)] text-[var(--fg)]'
                       : 'text-[var(--fg-faint)] hover:text-[var(--fg)]'
@@ -89,7 +89,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
             <ThemeToggle />
             <Link
               href="/habits"
-              className="invert-hover ms-1 hidden border px-4 py-2 text-sm font-bold sm:inline-block"
+              className="ms-1 hidden min-h-11 items-center rounded-full border px-5 text-sm font-bold transition-transform duration-200 hover:scale-[1.04] sm:inline-flex"
               style={{
                 background: 'var(--brand-solid)',
                 color: 'var(--brand-ink)',
