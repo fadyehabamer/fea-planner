@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import ScrollProgress from '@/components/site/ScrollProgress'
 import ThemeToggle from '@/components/ThemeToggle'
 import { useCopy } from '@/lib/copy'
 import { useI18n } from '@/lib/i18n'
@@ -42,6 +43,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
       </a>
 
       <header className="sticky top-0 z-40 border-b border-[var(--line-soft)] bg-[var(--bg)]/85 backdrop-blur">
+        <ScrollProgress />
         <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:px-6">
           <Link href="/" aria-label="fea-planner">
             <Wordmark />

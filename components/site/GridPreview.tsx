@@ -50,12 +50,17 @@ export default function GridPreview() {
               return (
                 <div
                   key={col}
-                  className="aspect-square flex-1 rounded-[2px]"
-                  style={{
-                    background: on ? 'var(--brand-solid)' : 'var(--field)',
-                    opacity: on ? alpha : 1,
-                    border: on ? 'none' : '1px solid var(--line-soft)',
-                  }}
+                  // Only ticked cells animate: the empty grid is already there
+                  // and the marks land on it, which is the thing being shown.
+                  className={`aspect-square flex-1 rounded-[2px] ${on ? 'cell-pop' : ''}`}
+                  style={
+                    {
+                      background: on ? 'var(--brand-solid)' : 'var(--field)',
+                      opacity: on ? alpha : 1,
+                      border: on ? 'none' : '1px solid var(--line-soft)',
+                      '--pop-delay': `${col * 16 + r * 22}ms`,
+                    } as React.CSSProperties
+                  }
                 />
               )
             })}

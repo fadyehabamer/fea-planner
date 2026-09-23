@@ -46,6 +46,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-dvh bg-bg text-fg antialiased">
         <script dangerouslySetInnerHTML={{ __html: noFlashTheme }} />
+        {/* Scroll reveals are driven by IntersectionObserver. Without JS nothing
+            would ever flip them visible, so opt out of hiding them entirely. */}
+        <noscript>
+          <style>{'.reveal-item{opacity:1!important;transform:none!important}'}</style>
+        </noscript>
         <ThemeProvider>{children}</ThemeProvider>
         <RegisterSW />
       </body>

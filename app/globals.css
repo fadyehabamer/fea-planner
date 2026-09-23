@@ -185,3 +185,117 @@ input::placeholder, textarea::placeholder { color: var(--fg-faint); }
     to   { opacity: 1; transform: none; }
   }
 }
+
+/* ============================================================
+   Motion system
+   Everything below animates transform/opacity only, so nothing
+   triggers layout, and every effect is gated behind
+   prefers-reduced-motion. Reduced-motion users get the finished
+   state immediately rather than a degraded animation.
+   ============================================================ */
+
+/* --- scroll-triggered reveal (driven by IntersectionObserver) --- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 640ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 640ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: transform, opacity;
+  }
+  .reveal-item[data-in='true'] {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+}
+
+/* --- reading-progress bar, driven by the scroll position itself --- */
+.scroll-progress {
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+[dir='rtl'] .scroll-progress {
+  transform-origin: 100% 50%;
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      animation: scrollProgress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+@keyframes scrollProgress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* --- hero grid cells popping in --- */
+@media (prefers-reduced-motion: no-preference) {
+  .cell-pop {
+    animation: cellPop 380ms cubic-bezier(0.34, 1.4, 0.64, 1) both;
+    animation-delay: var(--pop-delay, 0ms);
+  }
+}
+@keyframes cellPop {
+  from {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- card lift on hover --- */
+.lift {
+  transition:
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 240ms ease;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lift:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* --- structural grid texture: depth without colour --- */
+.grid-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--line-soft) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line-soft) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 35%, transparent 80%);
+  mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 35%, transparent 80%);
+}
+
+/* --- hero visual easing away as the page scrolls past it --- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-parallax {
+      animation: heroPass linear both;
+      animation-timeline: view();
+      animation-range: exit 10% exit 95%;
+    }
+  }
+}
+@keyframes heroPass {
+  to {
+    opacity: 0.25;
+    transform: translateY(-26px) scale(0.965);
+  }
+}
+
+/* --- sticky section visuals need clearance under the fixed header --- */
+.sticky-visual {
+  position: sticky;
+  top: 6rem;
+}
