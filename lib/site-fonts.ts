@@ -1,4 +1,4 @@
-import { Baloo_Bhaijaan_2, Bricolage_Grotesque, Caveat, Marhey } from 'next/font/google'
+import { Bricolage_Grotesque, Caveat, Marhey } from 'next/font/google'
 
 /* ─── Marketing site only ─────────────────────────────────────────────────
  * The landing pages are a paper notebook, so they get friendlier faces than
@@ -15,12 +15,7 @@ export const funFont = Bricolage_Grotesque({
   axes: ['opsz'],
 })
 
-/** Arabic display + body: rounded and warm, the same mood as Bricolage. */
-export const funArabicFont = Baloo_Bhaijaan_2({
-  subsets: ['arabic'],
-  variable: '--font-fun-ar',
-  display: 'swap',
-})
+/* Arabic display + body is Thamanya, shared with the app (lib/fonts.ts). */
 
 /** Handwritten margin notes, one per script. */
 export const handFont = Caveat({ subsets: ['latin'], variable: '--font-hand', display: 'swap' })

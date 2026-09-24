@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Font vendor packages: only the bundled woff2 files in app/fonts are shipped.
+# The licence forbids redistributing the font files themselves.
+/Thmanyah-Font-Family/

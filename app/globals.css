@@ -105,7 +105,7 @@ body {
 }
 
 /* Latin resolves to Archivo; Arabic has no glyphs there and falls through
-   to Reem Kufi, so each script gets the right face from one stack. */
+   to Thamanya, so each script gets the right face from one stack. */
 body {
   font-family: var(--font-latin), var(--font-ar), system-ui, sans-serif;
   padding-bottom: env(safe-area-inset-bottom);
@@ -246,30 +246,6 @@ textarea::placeholder {
   mask-image: radial-gradient(ellipse 80% 65% at 50% 0%, #000 30%, transparent 82%);
 }
 
-/* --- poster-scale type --- */
-.mega {
-  font-size: clamp(2.75rem, 10.5vw, 9.5rem);
-  line-height: 0.92;
-  letter-spacing: -0.045em;
-  font-weight: 900;
-}
-/* Arabic needs a taller line box for the dots and no negative tracking,
-   which would break the joins between letters. */
-[dir='rtl'] .mega {
-  line-height: 1.2;
-  letter-spacing: 0;
-}
-
-/* Variable fonts keep overlapping contours, so a plain text-stroke draws
-   seams through the inside of letters (worst across Arabic joins). Filling
-   with the page colour and painting the fill over the stroke hides them;
-   the stroke is doubled because only its outer half stays visible. */
-.outline-text {
-  color: var(--bg);
-  -webkit-text-stroke: 3px var(--fg);
-  paint-order: stroke fill;
-}
-
 /* --- headline words rise out of a mask, one after another --- */
 .word-mask {
   display: inline-block;
@@ -302,33 +278,6 @@ textarea::placeholder {
   transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* --- 3D tilt toward the pointer, with a glare that follows it --- */
-.tilt {
-  position: relative;
-  transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.tilt[data-active='true'] {
-  transition-duration: 120ms;
-}
-.tilt::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: radial-gradient(
-    26rem circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in oklab, var(--fg) 9%, transparent),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 280ms ease;
-}
-.tilt[data-active='true']::after {
-  opacity: 1;
-}
-
 /* --- card lift --- */
 .lift {
   transition:
@@ -338,18 +287,6 @@ textarea::placeholder {
 @media (prefers-reduced-motion: no-preference) {
   .lift:hover {
     transform: translateY(-6px);
-  }
-}
-
-/* --- spinning badge --- */
-@media (prefers-reduced-motion: no-preference) {
-  .spin-slow {
-    animation: spin 22s linear infinite;
-  }
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
   }
 }
 
@@ -413,7 +350,6 @@ textarea::placeholder {
   .theme-fade,
   .cell-btn,
   .magnetic,
-  .tilt,
   .lift {
     transition: none;
   }
@@ -506,7 +442,7 @@ textarea::placeholder {
   --leaf: #c4ee6e;
   --on: #1a1714;
 
-  font-family: var(--font-fun), var(--font-fun-ar), system-ui, sans-serif;
+  font-family: var(--font-fun), var(--font-ar), system-ui, sans-serif;
   background: var(--bg);
   color: var(--fg);
   font-feature-settings: normal;
@@ -535,7 +471,7 @@ textarea::placeholder {
 }
 
 .site .display {
-  font-family: var(--font-fun), var(--font-fun-ar), system-ui, sans-serif;
+  font-family: var(--font-fun), var(--font-ar), system-ui, sans-serif;
   letter-spacing: -0.035em;
 }
 [dir='rtl'] .site .display {
