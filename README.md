@@ -114,3 +114,16 @@ Both free tiers cover personal use, so running this costs nothing. Note that
 Vercel's Hobby plan is for non-commercial use — selling this planner would need
 a Pro plan. Supabase pauses a free project after a week with no traffic; opening
 the app wakes it again.
+
+## License
+
+The code is released under the [MIT License](LICENSE).
+
+## Third-party content
+
+- **Thmanyah Sans** (`app/fonts/thmanyah/`) — the Arabic typeface by
+  [Thmanyah](https://thmanyah.com). It is not covered by this repository's MIT
+  license and stays under its own license terms.
+- **Supabase agent skill** (`.agents/skills/supabase/`) — vendored from
+  [supabase/agent-skills](https://github.com/supabase/agent-skills) (see
+  `skills-lock.json`). It stays under that project's own license terms.
