@@ -3,6 +3,18 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { MONTHS, WEEKDAYS_SHORT, useI18n } from '@/lib/i18n'
 import { WEEK_COLORS, iso, monthDays, pct, weekBand } from '@/lib/dates'
+import {
+  averageSleep,
+  countPerDay,
+  countPerHabit,
+  groupWeekBands,
+  habitName,
+  logKey,
+  monthSummary,
+  parseSleepHours,
+  topHabits,
+  weekStats as computeWeekStats,
+} from '@/lib/stats'
 import { createClient } from '@/lib/supabase/client'
 import type { Habit } from '@/lib/types'
 import { Bar, Card, PageHeader, Spinner, StatCard, StepperNav, rateColor } from '@/components/ui'
@@ -46,7 +58,7 @@ export default function HabitsPage() {
 
       if (cancelled) return
       setHabits((h.data as Habit[]) ?? [])
-      setLogs(new Set(((l.data as { habit_id: string; day: string }[]) ?? []).map((r) => `${r.habit_id}|${r.day}`)))
+      setLogs(new Set(((l.data as { habit_id: string; day: string }[]) ?? []).map((r) => logKey(r.habit_id, r.day))))
       setSleep(
         Object.fromEntries(
           ((s.data as { day: string; hours: number }[]) ?? []).map((r) => [r.day, Number(r.hours)]),
@@ -64,7 +76,7 @@ export default function HabitsPage() {
   const toggle = useCallback(
     async (habitId: string, day: string) => {
       if (!userId) return
-      const key = `${habitId}|${day}`
+      const key = logKey(habitId, day)
       const wasOn = logs.has(key)
 
       // Optimistic: the cell flips instantly, the write follows.
@@ -92,8 +104,8 @@ export default function HabitsPage() {
   )
 
   async function setSleepHours(day: string, raw: string) {
-    const value = raw === '' ? null : Math.max(0, Math.min(24, Number(raw)))
-    if (value !== null && Number.isNaN(value)) return
+    const value = parseSleepHours(raw)
+    if (value === undefined) return
 
     setSleep((prev) => {
       const next = { ...prev }
@@ -113,66 +125,22 @@ export default function HabitsPage() {
   }
 
   // ---- derived numbers -------------------------------------------------
-  const perHabitDone = useMemo(() => {
-    const m: Record<string, number> = {}
-    for (const h of habits) m[h.id] = 0
-    for (const key of logs) {
-      const id = key.slice(0, key.indexOf('|'))
-      if (id in m) m[id] += 1
-    }
-    return m
-  }, [habits, logs])
+  const perHabitDone = useMemo(() => countPerHabit(habits, logs), [habits, logs])
+  const perDayDone = useMemo(() => countPerDay(days, logs), [days, logs])
 
-  const perDayDone = useMemo(() => {
-    const m: Record<string, number> = {}
-    for (const d of days) m[d] = 0
-    for (const key of logs) {
-      const d = key.slice(key.indexOf('|') + 1)
-      if (d in m) m[d] += 1
-    }
-    return m
-  }, [days, logs])
+  const { completed, missed, overall } = monthSummary(habits, days.length, logs.size)
+  const avgSleep = averageSleep(Object.values(sleep))
 
-  const completed = logs.size
-  const missed = Math.max(0, habits.length * days.length - completed)
-  const targetSum = habits.reduce((s, h) => s + h.target, 0)
-  const overall = pct(completed, targetSum)
-
-  const sleepValues = Object.values(sleep)
-  const avgSleep = sleepValues.length
-    ? (sleepValues.reduce((a, b) => a + b, 0) / sleepValues.length).toFixed(1)
-    : '—'
-
-  const bands = useMemo(() => {
-    const out: { band: number; days: string[] }[] = []
-    days.forEach((d, i) => {
-      const b = weekBand(i + 1)
-      const last = out[out.length - 1]
-      if (last && last.band === b) last.days.push(d)
-      else out.push({ band: b, days: [d] })
-    })
-    return out
-  }, [days])
+  const bands = useMemo(() => groupWeekBands(days), [days])
 
   const weekStats = useMemo(
-    () =>
-      bands.map(({ band, days: bd }) => {
-        const done = bd.reduce((s, d) => s + (perDayDone[d] ?? 0), 0)
-        return { band, done, total: bd.length * habits.length, pct: pct(done, bd.length * habits.length) }
-      }),
+    () => computeWeekStats(bands, perDayDone, habits.length),
     [bands, perDayDone, habits.length],
   )
 
-  const top5 = useMemo(
-    () =>
-      [...habits]
-        .map((h) => ({ h, done: perHabitDone[h.id] ?? 0, rate: pct(perHabitDone[h.id] ?? 0, h.target) }))
-        .sort((a, b) => b.rate - a.rate || b.done - a.done)
-        .slice(0, 5),
-    [habits, perHabitDone],
-  )
+  const top5 = useMemo(() => topHabits(habits, perHabitDone, 5), [habits, perHabitDone])
 
-  const name = (h: Habit) => (locale === 'ar' ? h.name_ar : h.name_en) || h.name_en || h.name_ar
+  const name = (h: Habit) => habitName(h, locale)
 
   function shiftMonth(delta: number) {
     setCursor((c) => new Date(c.getFullYear(), c.getMonth() + delta, 1))
@@ -293,7 +261,7 @@ export default function HabitsPage() {
                         {h.target}
                       </td>
                       {days.map((d, i) => {
-                        const on = logs.has(`${h.id}|${d}`)
+                        const on = logs.has(logKey(h.id, d))
                         const color = WEEK_COLORS[weekBand(i + 1)]
                         return (
                           <td key={d} className="border-b border-[var(--line-soft)] px-0.5 py-0.5 text-center">

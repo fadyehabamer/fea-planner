@@ -5,9 +5,10 @@ import { MONTHS, useI18n } from '@/lib/i18n'
 import { WEEK_COLORS, pct } from '@/lib/dates'
 import { createClient } from '@/lib/supabase/client'
 import type { Habit } from '@/lib/types'
+import { yearSummary, type MonthRow } from '@/lib/stats'
 import { Bar, Card, PageHeader, Spinner, StepperNav, rateColor } from '@/components/ui'
 
-type Row = { month: number; completed: number; avg_sleep: number | null }
+type Row = MonthRow
 
 export default function YearPage() {
   const { t, locale } = useI18n()
@@ -37,15 +38,7 @@ export default function YearPage() {
     }
   }, [supabase, year])
 
-  const monthlyTarget = habits.reduce((s, h) => s + h.target, 0)
-  const totalCompleted = rows.reduce((s, r) => s + Number(r.completed), 0)
-  const totalTarget = monthlyTarget * 12
-  const totalPct = pct(totalCompleted, totalTarget)
-
-  const sleepVals = rows.map((r) => r.avg_sleep).filter((v): v is number => v != null)
-  const yearSleep = sleepVals.length
-    ? (sleepVals.reduce((a, b) => a + Number(b), 0) / sleepVals.length).toFixed(1)
-    : '—'
+  const { monthlyTarget, totalCompleted, totalTarget, totalPct, yearSleep } = yearSummary(rows, habits)
 
   if (loading) return <Spinner label={t.loading} />
 

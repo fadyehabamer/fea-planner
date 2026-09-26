@@ -1,5 +1,7 @@
 # Daftar · دفتر
 
+[![CI](https://github.com/fadyehabamer/fea-planner/actions/workflows/ci.yml/badge.svg)](https://github.com/fadyehabamer/fea-planner/actions/workflows/ci.yml)
+
 A bilingual (العربية / English) habit, sleep, task and goal planner, in dark or
 light. One app, synced across your phone and your laptop.
 

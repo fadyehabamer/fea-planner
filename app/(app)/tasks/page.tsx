@@ -7,6 +7,7 @@ import { createClient } from '@/lib/supabase/client'
 import type { Task } from '@/lib/types'
 import { Bar, Card, PageHeader, Spinner, StepperNav } from '@/components/ui'
 import { useDebouncedSave } from '@/lib/useDebouncedSave'
+import { groupTasksByDay, nextTaskPosition } from '@/lib/stats'
 
 const MAX_PER_DAY = 14
 const TODAY_ISO = iso(new Date())
@@ -55,19 +56,13 @@ export default function TasksPage() {
     }
   }, [supabase, from, to])
 
-  const byDay = useMemo(() => {
-    const m: Record<string, Task[]> = {}
-    for (const d of weekDays) m[d] = []
-    for (const task of tasks) m[task.day]?.push(task)
-    for (const d of weekDays) m[d].sort((a, b) => a.position - b.position)
-    return m
-  }, [tasks, weekDays])
+  const byDay = useMemo(() => groupTasksByDay(tasks, weekDays), [tasks, weekDays])
 
   async function addTask(day: string, title: string) {
     if (!userId || !title.trim()) return
     const used = byDay[day] ?? []
     if (used.length >= MAX_PER_DAY) return
-    const position = (used.at(-1)?.position ?? 0) + 1
+    const position = nextTaskPosition(used)
 
     const { data } = await supabase
       .from('tasks')
